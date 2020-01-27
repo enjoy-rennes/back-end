@@ -1,0 +1,22 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "database": "restaurant",
+            "dialect": "MySQL",
+            "name": "localhost",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        },
+        {
+            "database": "enjoy_rennes",
+            "dialect": "MySQL",
+            "name": "enjoy",
+            "password": "sup_admin",
+            "port": 3306,
+            "server": "localhost",
+            "username": "sup_admin"
+        }
+    ]
+}
