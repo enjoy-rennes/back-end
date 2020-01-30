@@ -8,14 +8,19 @@
 
 ## 💾 Requierements
 ```sh
-    symfony check:requirements
+symfony check:requirements
+```
+```sh
+composer require symfony/dotenv
 ```
 
 ## 💾 Install
 
 ```sh
-    	Create full project enjoy_rennes
+Git pull 
 ```
+
+composer require symfony/dotenv
 
 ## 🔨 Usage
 
