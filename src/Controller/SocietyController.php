@@ -18,8 +18,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SocietyController extends AbstractController
 {
+   /**
+     * @Route("/", name="society_list")
+     * 
+     */ 
+
+     public function index() {
+
+       // $society= $this->getDoctrine()->getRepository
+       // (Society::class)->findAll();
+
+       $society= ['Societe 1', 'Societe 2'];
+
+        return $this->render('society/index.html.twig', array ('society' => $society));
+     }
+    
+    
+    
     /**
-     * @Route("/society", name="society")
+     * @Route("/society/add", name="add_society")
      */
     public function addSociety(Request $request) {
 
@@ -49,7 +66,7 @@ class SocietyController extends AbstractController
                 $entityManager->persist($society);
                 $entityManager->flush();
         
-                return $this->redirectToRoute('contact');
+                return $this->redirectToRoute('society_list');
             }
 
             return $this->render('society/new.html.twig', [
@@ -117,7 +134,6 @@ class SocietyController extends AbstractController
     $society->setWebsite('New society website!');
     $entityManager->remove($product);
     $entityManager->flush();
-    
     }
 }
 
