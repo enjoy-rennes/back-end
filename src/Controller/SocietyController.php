@@ -72,6 +72,45 @@ class SocietyController extends AbstractController
             ]);
     }
 
+
+     /**
+     * @Route("/society/update/{id}", methods={"GET", "POST"}, name="society_add")
+     */
+    public function updateSociety(Request $request, $id) {
+
+        $society = new Society();
+        $society = $this->getDoctrine()->getRepository
+       (Society::class)->find($id);
+
+        $society->setPhone('0214256309');
+        $society->setName('Securite sociale');
+        $society->setType('Administration locale');
+        $society->setWebsite('www.ameli.fr');
+
+        $form = $this->createFormBuilder($society)
+            ->add('phone', NumberType::class)
+            ->add('name', TextType::class)
+            ->add('type', TextType::class)
+            ->add('website', TextType::class)
+            ->add('save', SubmitType::class, ['label' => 'Ajouter une société'])
+            ->getForm();
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+        
+                return $this->redirectToRoute('society_list');
+            }
+
+            return $this->render('society/update.html.twig', [
+                'form' => $form->createView(),
+            ]);
+    }
+
+
+
     /**
      * @Route("/society/{id}", name="society_show")
      */ 
@@ -86,46 +125,22 @@ class SocietyController extends AbstractController
     
 
 
-    public function updateSociety($id)
-    {
-    $entityManager = $this->getDoctrine()->getManager();
-    $society = $entityManager->getRepository(Society::class)->find($id);
 
-    if (!$society) {
-        throw $this->createNotFoundException(
-            'No product found for id '.$id
-        );
-    }
+    /**
+     * @Route("/society/delete/{id}", methods={"DELETE"}, name="society_delete")
+     * 
+     */ 
 
-    $society->setPhone('New society phone!');
-    $society->setName('New society name!');
-    $society->setType('New society type!');
-    $society->setWebsite('New society website!');
-    $entityManager->flush();
-
-    return $this->redirectToRoute('updateSociety', [
-        'id' => $society->getId()
-    ]);
-}
-
-    public function removeSociety(): Response 
-
-    {
-    $entityManager = $this->getDoctrine()->getManager();
-    $society = $entityManager->getRepository(Society::class)->find($id);
+    public function deleteSociety(Request $request, $id){
+    $society = $this->getDoctrine()-> getRepository(Society::class)->find($id);
     
-    if (!$society) {
-        throw $this->createNotFoundException(
-            'No product found for id '.$id
-        );
-    }
-
-    $society->setPhone('New society phone!');
-    $society->setName('New society name!');
-    $society->setType('New society type!');
-    $society->setWebsite('New society website!');
-    $entityManager->remove($product);
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->remove($society);
     $entityManager->flush();
+
+    $response = new Response();
+    $response->send();
+
     }
 }
 
