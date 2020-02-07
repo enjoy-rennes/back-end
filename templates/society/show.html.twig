@@ -1,2 +1,16 @@
-{# templates/society/show.html.twig #}
-{{ form(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des sociétés!{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ society.id }} </h1>
+<p> {{ society.phone }} </p>
+<p> {{ society.name }} </p>
+<p> {{ society.type }} </p>
+<p> {{ society.website }} </p>
+
+<a href="/society_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}

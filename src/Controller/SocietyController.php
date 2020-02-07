@@ -18,25 +18,23 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SocietyController extends AbstractController
 {
+    
+
    /**
-     * @Route("/", name="society_list")
+     * @Route("/society_list", methods={"GET"}, name="society_list")
      * 
      */ 
-
      public function index() {
 
-       // $society= $this->getDoctrine()->getRepository
-       // (Society::class)->findAll();
-
-       $society= ['Societe 1', 'Societe 2'];
+        $society= $this->getDoctrine()->getRepository
+        (Society::class)->findAll();
 
         return $this->render('society/index.html.twig', array ('society' => $society));
      }
     
     
-    
     /**
-     * @Route("/society/add", name="add_society")
+     * @Route("/society/add", name="society_add")
      */
     public function addSociety(Request $request) {
 
@@ -74,21 +72,15 @@ class SocietyController extends AbstractController
             ]);
     }
 
+    /**
+     * @Route("/society/{id}", name="society_show")
+     */ 
+    public function showSociety($id) {
+       $society = $this->getDoctrine()->getRepository
+       (Society::class)->find($id);
 
-    public function showSociety($id): Response 
-
-    {
-       $society = $this->getDoctrine()
-       ->getRepository(Society::class)
-       ->find($id);
-
-       if(!$society) {
-           throw $this->createNotFoundException(
-            'No product found for id'.$id
-           );
-       }
-
-       return new Response('Check out this society: '.$society->getName());
+       return $this->render('society/show.html.twig', array 
+       ('society' => $society));
       
     }
     

@@ -17,26 +17,26 @@
 <th>Actions</th>
 </tr>
 </thead>
-
 <tbody> 
 
 {% for society in society %}
 <tr> 
-<td> {{ society }} </td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td> <a href="/society/1" class="btn 
-btn-dark">Show</a>
+<td> {{ society.id }} </td>
+<td> {{ society.phone }} </td>
+<td> {{ society.name }} </td>
+<td> {{ society.type }} </td>
+<td> {{ society.website }} </td>
+<td> 
+<a href="/society/{{ society.id }}" class="btn 
+btn-dark">Voir</a>
 </td>
 </tr>
- {% endfor %} 
+ {% endfor %}
 </tbody>
 </table>
 {% else  %}
 <p> La liste des sociétés est vide</p>
 
- {% endif %}
+{% endif %}
 
 {% endblock %}
