@@ -9,7 +9,7 @@
 <table id="society" class="table table-striped"> 
 <thead>
 <tr>
-<th>id</th>
+<th>#</th>
 <th>phone</th>
 <th>name</th>
 <th>type</th>
@@ -27,10 +27,13 @@
 <td> {{ society.type }} </td>
 <td> {{ society.website }} </td>
 <td> 
-<a href="/society/{{ society.id }}" class="btn 
-btn-dark">Voir</a>
+<a href="/society/{{ society.id }}" class="btn fa fa-eye"></a>
 
-<a href="#" class="btn btn-danger delete-society" data-id="{{ society.id }}">Supprimer</a> 
+<a href="/society/update/{{ society.id }}" class="btn fa fa-refresh"></a>
+
+<a href="#" class="btn fa fa-trash delete-society" data-id="{{ society.id }}"></a> 
+
+<a href="/society/add" class="btn fa fa-plus"></a>
 
 
 </td>

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des adresses!{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ conditions.id }} </h1>
+<p> {{ conditions.name }} </p>
+<p> {{ conditions.operator }}</p>
+<p> {{ conditions.type }} </p>
+<p> {{ conditions.estimate }} </p>
+
+<a href="/conditions_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}
+
+{# templates/conditions/show.html.twig #}

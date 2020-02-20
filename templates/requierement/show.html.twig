@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des adresses!{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ requierement.id }} </h1>
+<p> {{ requierement.name }} </p>
+<p> {{ requierement.operator }}</p>
+<p> {{ requierement.type }} </p>
+<p> {{ requierement.value }} </p>
+
+<a href="/requierement_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}
+
+{# templates/requierement/show.html.twig #}

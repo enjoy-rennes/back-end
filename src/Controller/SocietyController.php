@@ -39,10 +39,10 @@ class SocietyController extends AbstractController
     public function addSociety(Request $request) {
 
         $society = new Society();
-        $society->setPhone('0214256309');
-        $society->setName('Securite sociale');
-        $society->setType('Administration locale');
-        $society->setWebsite('www.ameli.fr');
+       // $society->setPhone('0214256309');
+       // $society->setName('Securite sociale');
+       // $society->setType('Administration locale');
+       // $society->setWebsite('www.ameli.fr');
 
         $form = $this->createFormBuilder($society)
             ->add('phone', NumberType::class)
@@ -74,25 +74,21 @@ class SocietyController extends AbstractController
 
 
      /**
-     * @Route("/society/update/{id}", methods={"GET", "POST"}, name="society_add")
+     * @Route("/society/update/{id}", methods={"GET", "POST"}, name="society_update")
      */
     public function updateSociety(Request $request, $id) {
 
         $society = new Society();
         $society = $this->getDoctrine()->getRepository
        (Society::class)->find($id);
-
-        $society->setPhone('0214256309');
-        $society->setName('Securite sociale');
-        $society->setType('Administration locale');
-        $society->setWebsite('www.ameli.fr');
+       
 
         $form = $this->createFormBuilder($society)
             ->add('phone', NumberType::class)
             ->add('name', TextType::class)
             ->add('type', TextType::class)
             ->add('website', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Ajouter une société'])
+            ->add('save', SubmitType::class, ['label' => 'Modfier la société'])
             ->getForm();
 
             $form->handleRequest($request);
@@ -124,8 +120,6 @@ class SocietyController extends AbstractController
     }
     
 
-
-
     /**
      * @Route("/society/delete/{id}", methods={"DELETE"}, name="society_delete")
      * 
@@ -143,4 +137,5 @@ class SocietyController extends AbstractController
 
     }
 }
+
 

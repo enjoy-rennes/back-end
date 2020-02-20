@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des conditions {% endblock %}
+
+{% block body %}
+
+{% if conditions %}
+<h1> Liste des conditions</h1>
+<table id="conditions" class="table table-striped"> 
+<thead>
+<tr>
+<th>#</th>
+<th>Nom</th>
+<th>Opérateur</th>
+<th>Type</th>
+<th>Valeur</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody> 
+
+{% for conditions in conditions %}
+<tr> 
+<td> {{ conditions.id }} </td>
+<td> {{ conditions.name }} </td>
+<td> {{ conditions.operator }} </td>
+<td> {{ conditions.type }} </td>
+<td> {{ conditions.estimate }} </td>
+<td> 
+<a href="/conditions/{{ conditions.id }}" class="btn btn-outline-primary">Voir</a>
+
+<a href="/conditions/update/{{ conditions.id }}" class="btn btn-outline-secondary">Modifier</a>
+
+<a href="#" class="btn btn-outline-danger delete-condition" data-id="{{ conditions.id }}">Supprimer</a> 
+
+<a href="/conditions/add" class="btn btn-outline-success">Ajouter</a>
+
+</td>
+</tr>
+ {% endfor %}
+</tbody>
+</table>
+{% else  %}
+<p> La liste des conditions est vide</p>
+
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="/js/main.js">  </script>
+
+{% endblock %}
+

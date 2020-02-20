@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ConditionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\RequierementRepository")
  */
-class Condition
+class Requierement
 {
     /**
      * @ORM\Id()
@@ -17,7 +17,7 @@ class Condition
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
@@ -27,12 +27,12 @@ class Condition
     private $operator;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=255)
      */
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $value;
 

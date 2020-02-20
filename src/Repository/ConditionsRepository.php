@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Condition;
+use App\Entity\Conditions;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Condition|null find($id, $lockMode = null, $lockVersion = null)
- * @method Condition|null findOneBy(array $criteria, array $orderBy = null)
- * @method Condition[]    findAll()
- * @method Condition[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Conditions|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Conditions|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Conditions[]    findAll()
+ * @method Conditions[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ConditionRepository extends ServiceEntityRepository
+class ConditionsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Condition::class);
+        parent::__construct($registry, Conditions::class);
     }
 
     // /**
-    //  * @return Condition[] Returns an array of Condition objects
+    //  * @return Conditions[] Returns an array of Conditions objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ConditionRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Condition
+    public function findOneBySomeField($value): ?Conditions
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
