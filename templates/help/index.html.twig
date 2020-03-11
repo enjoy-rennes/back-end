@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}La liste des aides!{% endblock %}
+{% block title %}La liste des aides{% endblock %}
 
 {% block body %}
 
 {% if help %}
-<h1> Liste des sociétés</h1>
+<h1> Liste des aides</h1>
 <table id="help" class="table table-striped"> 
 <thead>
 <tr>
 <th>#</th>
-<th>name</th>
-<th>description</th>
-<th>type</th>
+<th>Nom</th>
+<th>Type</th>
 <th>Actions</th>
 </tr>
 </thead>
@@ -21,9 +20,8 @@
 {% for help in help %}
 <tr> 
 <td> {{ help.id }} </td>
-<td> {{ help.name}} </td>
-<td> {{ help.description }} </td>
-
+<td> {{ help.name }} </td>
+<td> {{ help.type}} </td>
 <td> 
 <a href="/help/{{ help.id }}" class="btn btn-outline-primary">Voir</a>
 
@@ -31,9 +29,7 @@
 
 <a href="#" class="btn btn-outline-danger delete-help" data-id="{{ help.id }}">Supprimer</a> 
 
-<a href="/society/add" class="btn btn-outline-success">Ajouter</a>
-
-
+<a href="/help/add" class="btn btn-outline-success">Ajouter</a>
 
 </td>
 </tr>
@@ -51,3 +47,4 @@
 <script src="/js/main.js">  </script>
 
 {% endblock %}
+
