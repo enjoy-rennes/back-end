@@ -7,35 +7,35 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity;
-use App\Entity\Requierement;
+use App\Entity\Requirement;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 
-class RequierementController extends AbstractController
+class RequirementController extends AbstractController
 {
              
    /**
-     * @Route("/requierement_list", methods={"GET"}, name="requierement_list")
+     * @Route("/requirement_list", methods={"GET"}, name="requirement_list")
      * 
      */ 
     public function index() {
 
-        $requierement= $this->getDoctrine()->getRepository
-        (Requierement::class)->findAll();
+        $requirement= $this->getDoctrine()->getRepository
+        (Requirement::class)->findAll();
 
-        return $this->render('requierement/index.html.twig', array ('requierement' => $requierement));
+        return $this->render('requirement/index.html.twig', array ('requirement' => $requirement));
      }
     
     /**
-     * @Route("/requierement/add", name="requierement_add")
+     * @Route("/requirement/add", name="requirement_add")
      */
     public function addCondition(Request $request) {
 
-        $requierement = new Requierement();
-        $form = $this->createFormBuilder($requierement)
+        $requirement = new Requirement();
+        $form = $this->createFormBuilder($requirement)
             ->add('name', TextType::class)
             ->add('operator', TextType::class)
             ->add('type', TextType::class)
@@ -45,30 +45,30 @@ class RequierementController extends AbstractController
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $requierement = $form->getData();
+                $requirement = $form->getData();
                 $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($requierement);
+                $entityManager->persist($requirement);
                 $entityManager->flush();
         
-                return $this->redirectToRoute('requierement_list');
+                return $this->redirectToRoute('requirement_list');
             }
 
-            return $this->render('requierement/new.html.twig', [
+            return $this->render('requirement/new.html.twig', [
                 'form' => $form->createView(),
             ]);
     }
 
 
      /**
-     * @Route("/requierement/update/{id}", methods={"GET", "POST"}, name="requierement_update")
+     * @Route("/requirement/update/{id}", methods={"GET", "POST"}, name="requirement_update")
      */
     public function updateCondition(Request $request, $id) {
 
-        $requierement = new Requierement();
-        $requierement = $this->getDoctrine()->getRepository
-       (Requierement::class)->find($id);
+        $requirement = new Requirement();
+        $requirement = $this->getDoctrine()->getRepository
+       (Requirement::class)->find($id);
 
-        $form = $this->createFormBuilder($requierement)
+        $form = $this->createFormBuilder($requirement)
         ->add('name', TextType::class)
         ->add('operator', TextType::class)
         ->add('type', TextType::class)
@@ -82,10 +82,10 @@ class RequierementController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
         
-                return $this->redirectToRoute('requierement_list');
+                return $this->redirectToRoute('requirement_list');
             }
 
-            return $this->render('requierement/update.html.twig', [
+            return $this->render('requirement/update.html.twig', [
                 'form' => $form->createView(),
             ]);
     }
@@ -93,28 +93,28 @@ class RequierementController extends AbstractController
 
 
     /**
-     * @Route("/requierement/{id}", name="requierement_show")
+     * @Route("/requirement/{id}", name="requirement_show")
      */ 
     public function showCondition($id) {
-       $requierement = $this->getDoctrine()->getRepository
-       (Requierement::class)->find($id);
+       $requirement = $this->getDoctrine()->getRepository
+       (Requirement::class)->find($id);
 
-       return $this->render('requierement/show.html.twig', array 
-       ('requierement' => $requierement));
+       return $this->render('requirement/show.html.twig', array 
+       ('requirement' => $requirement));
       
     }
     
 
     /**
-     * @Route("/requierement/delete/{id}", methods={"DELETE"}, name="requierement_delete")
+     * @Route("/requirement/delete/{id}", methods={"DELETE"}, name="requirement_delete")
      * 
      */ 
 
     public function deleteCondition(Request $request, $id){
-    $requierement = $this->getDoctrine()-> getRepository(Requierement::class)->find($id);
+    $requirement = $this->getDoctrine()-> getRepository(Requirement::class)->find($id);
     
     $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->remove($requierement);
+    $entityManager->remove($requirement);
     $entityManager->flush();
 
     $response = new Response();

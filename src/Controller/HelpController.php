@@ -36,13 +36,11 @@ class HelpController extends AbstractController
      * @Route("/help/add", name="help_add")
      */
     public function addHelp(Request $request) {
-
-        $category = new Category();
         $help = new Help();
         $form = $this->createFormBuilder($help)
             ->add('name', TextType::class)
-            ->add('type', EntityType::class, array(
-
+            ->add('description', TextType::class)
+            ->add('category', EntityType::class, array(
                 'class'=>'App\Entity\Category',
                 'choice_label'=>'type',
                 'expanded'=>false,
@@ -56,17 +54,14 @@ class HelpController extends AbstractController
                 $help = $form->getData();
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($help);
-                $entityManager->persist($category);
-
                 $entityManager->flush();
-        
                 return $this->redirectToRoute('help_list');
             }
-
             return $this->render('help/new.html.twig', [
                 'form' => $form->createView(),
             ]);
-    }
+    } 
+    
 
 
      /**
@@ -80,8 +75,13 @@ class HelpController extends AbstractController
 
         $form = $this->createFormBuilder($help)
         ->add('name', TextType::class)
-        ->add('category_type', TextType::class)
-        ->add('type', TextType::class)
+        ->add('description', TextType::class)
+        ->add('category', EntityType::class, array(
+            'class'=>'App\Entity\Category',
+            'choice_label'=>'type',
+            'expanded'=>false,
+            'multiple'=>false
+        ))
         ->add('save', SubmitType::class, ['label' => 'Modifier'])
         ->getForm();
 
@@ -100,18 +100,16 @@ class HelpController extends AbstractController
     }
 
 
-
-    /**
-     * @Route("/help{id}", name="help_show")
+   /**
+     * @Route("/help/{id}", name="help_show")
      */ 
     public function showHelp($id) {
-       $help = $this->getDoctrine()->getRepository
-       (Help::class)->find($id);
-
-       return $this->render('help/show.html.twig', array 
-       ('help' => $help));
-      
-    }
+        $help = $this->getDoctrine()->getRepository
+        (Help::class)->find($id);
+ 
+        return $this->render('help/show.html.twig', array 
+        ('help' => $help));
+     }
     
 
     /**

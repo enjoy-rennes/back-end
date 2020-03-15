@@ -1,3 +1,24 @@
+//DELETE HELP---------------------------------------------------------------------------------------------------------------------------------->
+
+const help = document.getElementById('help');
+
+if (help) {
+    help.addEventListener('click', e => {
+       
+       if (e.target.className === 'btn fa fa-trash delete-help'){
+         
+           if (confirm('Are you sure?')) {
+             const id = e.target.getAttribute('data-id'); 
+             
+             fetch(`/help/delete/${id}`, {
+                 method: 'DELETE'}).then( res => window.location.reload());
+           }
+       }
+    });
+}
+
+
+
 //DELETE SOCIETY---------------------------------------------------------------------------------------------------------------------------------->
 
 const society = document.getElementById('society');
@@ -17,19 +38,19 @@ const society = document.getElementById('society');
      });
  }
 
-//DELETE ADRESS---------------------------------------------------------------------------------------------------------------------------------->
+//DELETE ADDRESS---------------------------------------------------------------------------------------------------------------------------------->
 
- const adress = document.getElementById('adress');
+ const address = document.getElementById('address');
 
- if (adress) {
-     adress.addEventListener('click', e => {
+ if (address) {
+     address.addEventListener('click', e => {
         
-        if (e.target.className === 'btn fa fa-trash delete-adress'){
+        if (e.target.className === 'btn fa fa-trash delete-address'){
           
             if (confirm('Are you sure?')) {
               const id = e.target.getAttribute('data-id'); 
               
-              fetch(`/adress/delete/${id}`, {
+              fetch(`/address/delete/${id}`, {
                   method: 'DELETE'}).then( res => window.location.reload());
             }
         }
@@ -38,22 +59,45 @@ const society = document.getElementById('society');
 
 
 
-//--------------------------------------------------------------------------------------------------------------------------------------------->
+//DELETE REQUIERMENT--------------------------------------------------------------------------------------------------------------------------------------------->
 
-const requierement = document.getElementById('requierement');
+const requirement = document.getElementById('requirement');
 
-if (requierement) {
-    requierement.addEventListener('click', e => {
+if (requirement) {
+    requirement.addEventListener('click', e => {
        
-       if (e.target.className === 'btn fa fa-trash delete-requierement'){
+       if (e.target.className === 'btn fa fa-trash delete-requirement'){
          
            if (confirm('Are you sure?')) {
              const id = e.target.getAttribute('data-id'); 
              
-             fetch(`/requierement/delete/${id}`, {
+             fetch(`/requirement/delete/${id}`, {
                  method: 'DELETE'}).then( res => window.location.reload());
            }
        }
     });
 }
+
+
+
+
+//DELETE CATEGORY---------------------------------------------------------------------------------------------------------------------------------->
+
+const category = document.getElementById('category');
+
+if (category) {
+    category.addEventListener('click', e => {
+       
+       if (e.target.className === 'btn fa fa-trash delete-category'){
+         
+           if (confirm('Are you sure?')) {
+             const id = e.target.getAttribute('data-id'); 
+             
+             fetch(`/category/delete/${id}`, {
+                 method: 'DELETE'}).then( res => window.location.reload());
+           }
+       }
+    });
+}
+
 

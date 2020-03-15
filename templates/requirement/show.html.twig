@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des adresses!{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ requirement.id }} </h1>
+<p> {{ requirement.name }} </p>
+<p> {{ requirement.operator }}</p>
+<p> {{ requirement.type }} </p>
+<p> {{ requirement.value }} </p>
+
+<a href="/requirement_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}
+
+{# templates/requirement/show.html.twig #}

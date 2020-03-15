@@ -1,20 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}La liste des catégories {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% if category %}
+<h1> Liste des catégories</h1>
+<table id="category" class="table table-striped"> 
+<thead>
+<tr>
+<th>#</th>
+<th>Type</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody> 
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/fayes/projet/back-end/src/Controller/CategoryController.php'|file_link(0) }}">src/Controller/CategoryController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/fayes/projet/back-end/templates/category/index.html.twig'|file_link(0) }}">templates/category/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% for category in category %}
+<tr> 
+<td> {{ category.id }} </td>
+<td> {{ category.type }} </td>
+
+<td> 
+<a href="/category/{{ category.id }}" class="btn fa fa-eye"></a>
+
+<a href="/category/update/{{ category.id }}" class="btn fa fa-refresh"></a>
+
+<a href="#" class="btn fa fa-trash delete-category" data-id="{{ category.id }}"></a> 
+
+<a href="/category/add" class="btn fa fa-plus"></a>
+
+</td>
+</tr>
+ {% endfor %}
+</tbody>
+</table>
+{% else  %}
+<p> La liste des catégories est vide</p>
+
+{% endif %}
+
 {% endblock %}
+
+{% block javascripts %}
+<script src="/js/main.js">  </script>
+
+{% endblock %}
+
+

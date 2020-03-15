@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Requierement;
+use App\Entity\Requirement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Requierement|null find($id, $lockMode = null, $lockVersion = null)
- * @method Requierement|null findOneBy(array $criteria, array $orderBy = null)
- * @method Requierement[]    findAll()
- * @method Requierement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Requirement|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Requirement|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Requirement[]    findAll()
+ * @method Requirement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RequierementRepository extends ServiceEntityRepository
+class RequirementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Requierement::class);
+        parent::__construct($registry, Requirement::class);
     }
 
     // /**
-    //  * @return Requierement[] Returns an array of Requierement objects
+    //  * @return Requirement[] Returns an array of Requirement objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class RequierementRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Requierement
+    public function findOneBySomeField($value): ?Requirement
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

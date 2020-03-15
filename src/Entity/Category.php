@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,9 +24,14 @@ class Category
     private $type;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Help", mappedBy="category_type", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Help", mappedBy="category")
      */
-    private $help;
+    private $helps;
+
+    public function __construct()
+    {
+        $this->helps = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -43,21 +50,35 @@ class Category
         return $this;
     }
 
-    public function getHelp(): ?Help
+    /**
+     * @return Collection|Help[]
+     */
+    public function getHelps(): Collection
     {
-        return $this->help;
+        return $this->helps;
     }
 
-    public function setHelp(Help $help): self
+    public function addHelp(Help $help): self
     {
-        $this->help = $help;
-
-        // set the owning side of the relation if necessary
-        if ($help->getCategoryType() !== $this) {
-            $help->setCategoryType($this);
+        if (!$this->helps->contains($help)) {
+            $this->helps[] = $help;
+            $help->setCategory($this);
         }
 
         return $this;
     }
 
+    public function removeHelp(Help $help): self
+    {
+        if ($this->helps->contains($help)) {
+            $this->helps->removeElement($help);
+            // set the owning side to null (unless already changed)
+            if ($help->getCategory() === $this) {
+                $help->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+    
 }

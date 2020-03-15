@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des aides!{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ help.id }} </h1>
+<p> {{ help.name }} </p>
+<p> {{ help.description }} </p>
+
+<a href="/help_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}
+
+{# templates/help/show.html.twig #}

@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity;
-use App\Entity\Adress;
+use App\Entity\Address;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -15,32 +15,32 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class AdressController extends AbstractController
+class AddressController extends AbstractController
 {
     /**
-     * @Route("/adress_list", methods={"GET"}, name="adress_list")
+     * @Route("/address_list", methods={"GET"}, name="address_list")
      * 
      */ 
     public function index() {
 
-        $adress= $this->getDoctrine()->getRepository
-        (Adress::class)->findAll();
+        $address= $this->getDoctrine()->getRepository
+        (Address::class)->findAll();
 
-        return $this->render('adress/index.html.twig', array ('adress' => $adress));
+        return $this->render('address/index.html.twig', array ('address' => $address));
      }
     
     
     /**
-     * @Route("/adress/add", name="adress_add")
+     * @Route("/address/add", name="address_add")
      */
-    public function addAdress(Request $request) {
+    public function addAddress(Request $request) {
 
-        $adress = new Adress();
+        $address = new Address();
 
-        $form = $this->createFormBuilder($adress)
+        $form = $this->createFormBuilder($address)
             ->add('postalCode', NumberType::class)
             ->add('streetNumber', TextType::class)
-            ->add('adress', TextType::class)
+            ->add('address', TextType::class)
             ->add('city', TextType::class)
             ->add('country', TextType::class)
             ->add('name', TextType::class)
@@ -49,32 +49,32 @@ class AdressController extends AbstractController
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $adress = $form->getData();
+                $address = $form->getData();
                 $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($adress);
+                $entityManager->persist($address);
                 $entityManager->flush();
-                return $this->redirectToRoute('adress_list');
+                return $this->redirectToRoute('address_list');
             }
 
-            return $this->render('adress/new.html.twig', [
+            return $this->render('address/new.html.twig', [
                 'form' => $form->createView(),
             ]);
     }
 
 
      /**
-     * @Route("/adress/update/{id}", methods={"GET", "POST"}, name="adress_update")
+     * @Route("/address/update/{id}", methods={"GET", "POST"}, name="address_update")
      */
-    public function updateAdress(Request $request, $id) {
+    public function updateAddress(Request $request, $id) {
 
-        $adress = new Adress();
-        $adress = $this->getDoctrine()->getRepository
-       (Adress::class)->find($id);
+        $address = new Address();
+        $address = $this->getDoctrine()->getRepository
+       (Address::class)->find($id);
 
-            $form = $this->createFormBuilder($adress)
+            $form = $this->createFormBuilder($address)
             ->add('postalCode', NumberType::class)
             ->add('streetNumber', TextType::class)
-            ->add('adress', TextType::class)
+            ->add('address', TextType::class)
             ->add('city', TextType::class)
             ->add('country', TextType::class)
             ->add('name', TextType::class)
@@ -87,10 +87,10 @@ class AdressController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
         
-                return $this->redirectToRoute('adress_list');
+                return $this->redirectToRoute('address_list');
             }
 
-            return $this->render('adress/update.html.twig', [
+            return $this->render('address/update.html.twig', [
                 'form' => $form->createView(),
             ]);
     }
@@ -98,28 +98,28 @@ class AdressController extends AbstractController
 
 
     /**
-     * @Route("/adress/{id}", name="adress_show")
+     * @Route("/address/{id}", name="address_show")
      */ 
-    public function showAdress($id) {
-       $adress = $this->getDoctrine()->getRepository
-       (Adress::class)->find($id);
+    public function showAddress($id) {
+       $address = $this->getDoctrine()->getRepository
+       (Address::class)->find($id);
 
-       return $this->render('adress/show.html.twig', array 
-       ('adress' => $adress));
+       return $this->render('address/show.html.twig', array 
+       ('address' => $address));
       
     }
     
 
     /**
-     * @Route("/adress/delete/{id}", methods={"DELETE"}, name="adress_delete")
+     * @Route("/address/delete/{id}", methods={"DELETE"}, name="address_delete")
      * 
      */ 
 
-    public function deleteAdress(Request $request, $id){
-    $adress = $this->getDoctrine()-> getRepository(Adress::class)->find($id);
+    public function deleteAddress(Request $request, $id){
+    $address = $this->getDoctrine()-> getRepository(Address::class)->find($id);
     
     $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->remove($adress);
+    $entityManager->remove($address);
     $entityManager->flush();
 
     $response = new Response();
