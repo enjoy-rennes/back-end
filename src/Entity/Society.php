@@ -41,6 +41,12 @@ class Society
      */
     private $description;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", inversedBy="society", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $address;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,6 +116,18 @@ class Society
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

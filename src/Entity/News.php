@@ -21,12 +21,12 @@ class News
      */
     private $name;
 
-    /**
+     /**
      * @ORM\Column(type="date")
      */
     private $date;
-
-    /**
+    
+   /**
      * @ORM\Column(type="string", length=255)
      */
     private $description;
