@@ -1,4 +1,4 @@
-
+<div>
 <nav class = "navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#"  > Enjoy Rennes </a>
   <button class = "navbar-toggler" type = "button" data-toggle = "collapse" data-target = "# navbarColor01" aria-controls = "navbarColor01" aria-extended = "false" aria-label = "Toggle navigation ">
@@ -48,15 +48,15 @@
         <a class="nav-link" href="#"> Bon plans </a>
       </li>
     </ul>
-  <div class = "btn-group" role = "group" aria-label = "Button group with nested dropdown">
-  <div class = "btn-group" role = "group">
-    <button id = "btnGroupDrop1" type = "button" class = "fa fa-fw fa-user" data-toggle = "dropdown" aria-haspopup = "true" aria-Expand = "false"> </button>
-    <div class = "dropdown-menu" aria-labelledby = "btnGroupDrop1" style = "">
-      <a class="dropdown-item" href="/manage">  <font style = "vertical-align: inherit;"> Mon compte </font> </font> </a>
-      <a class="dropdown-item" href="/logout">  <font style = "vertical-align: inherit;"> Logout </font> </font> </a>
+  <div class="btn-group" role="group" aria-label="Groupe de boutons avec liste déroulante imbriquée">
+  <button type="button" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Compte</font></font></button>
+  <div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" href="/manage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mon compte</font></font></a>
+      <a class="dropdown-item" href="/logout"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Déconnexion</font></font></a>
     </div>
   </div>
-</div>
 </div>
    {# <form class = "form-inline my-2 my-lg-0">
       <input class = "form-control mr-sm-2" type = "text" placeholder = "Search">
@@ -64,3 +64,4 @@
     </form>
   </div> #}  
 </nav>
+</div>

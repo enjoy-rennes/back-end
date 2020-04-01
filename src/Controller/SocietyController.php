@@ -8,11 +8,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity;
 use App\Entity\Society;
-
+use App\Entity\Address;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 
 
@@ -49,6 +52,13 @@ class SocietyController extends AbstractController
             ->add('name', TextType::class)
             ->add('type', TextType::class)
             ->add('website', TextType::class)
+            ->add('description', TextType::class)
+            ->add('address', EntityType::class, array(
+                'class'=>'App\Entity\Address',
+                'choice_label'=>'name',
+                'expanded'=>false,
+                'multiple'=>false
+            ))
             ->add('save', SubmitType::class, ['label' => 'Ajouter une société'])
             ->getForm();
 

@@ -47,6 +47,12 @@ class Society
      */
     private $address;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\News", mappedBy="society", cascade={"persist", "remove"})
+     */
+    private $news;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -131,4 +137,23 @@ class Society
 
         return $this;
     }
+
+    public function getNews(): ?News
+    {
+        return $this->news;
+    }
+
+    public function setNews(News $news): self
+    {
+        $this->news = $news;
+
+        // set the owning side of the relation if necessary
+        if ($news->getSociety() !== $this) {
+            $news->setSociety($this);
+        }
+
+        return $this;
+    }
+
+    
 }

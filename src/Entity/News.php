@@ -31,6 +31,13 @@ class News
      */
     private $description;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Society", inversedBy="news", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $society;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,4 +78,18 @@ class News
 
         return $this;
     }
+
+    public function getSociety(): ?Society
+    {
+        return $this->society;
+    }
+
+    public function setSociety(Society $society): self
+    {
+        $this->society = $society;
+
+        return $this;
+    }
+
+   
 }

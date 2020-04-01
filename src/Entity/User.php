@@ -7,12 +7,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Serializable;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User implements UserInterface
+
 {
     /**
      * @ORM\Id()
@@ -48,6 +50,12 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
+
 
     public function getId(): ?int
     {
@@ -139,7 +147,7 @@ class User implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-
+    
     /**
      * @see UserInterface
      */
@@ -158,4 +166,6 @@ class User implements AdvancedUserInterface, \Serializable
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    
 }
