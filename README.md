@@ -28,6 +28,23 @@ composer require symfony/dotenv
 symfony server:start 
 ```
 
+## Database connection
+
+Open the file Add this line on the file ```.env``` and replace by your ```db_user```, ```db_password```, ```db_name```.
+
+```sh
+DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name"
+```
+
+## Database migration
+
+```sh
+php bin/console make:migration
+```
+
+```sh
+php bin/console doctrine:migrations:migrate
+```
 ## Routes
   -------------------------- ---------- -------- ------ ----------------------------------- 
   Name                       Method     Scheme   Host   Path                               
@@ -87,7 +104,9 @@ symfony server:start
   login                      GET|POST   ANY      ANY    /login
  -------------------------- ---------- -------- ------ -----------------------------------
 
-## Author
+## Com
+
+
 
 👤 **NDIAYE Ibrahima**
 

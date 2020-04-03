@@ -21,7 +21,7 @@ use App\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class UserController extends AbstractType
+class UserController extends AbstractController
 {
     
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -71,5 +71,54 @@ class UserController extends AbstractType
 		return $this->render('user/show.html.twig', [
 			'user' => $user
 		]);
-	}
+    }
+
+    /**
+     * @Route("/user/update/{id}", methods={"GET", "POST"}, name="user_update")
+     */
+    public function updateUser(Request $request, $id) {
+
+        $user = new User();
+        $user = $this->getDoctrine()->getRepository
+       (User::class)->find($id);
+
+        $form = $this->createFormBuilder($user)
+        ->add('username', TextType::class)
+        ->add('password', PasswordType::class)
+        ->add('email', EmailType::class)
+        ->add('save', SubmitType::class, ['label' => 'Modifier'])
+        ->getForm();
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+        
+                return $this->redirectToRoute('user_list');
+            }
+
+            return $this->render('user/update.html.twig', [
+                'form' => $form->createView(),
+            ]);
+    }
+
+    /**
+     * @Route("/user/delete/{id}", methods={"DELETE"}, name="user_delete")
+     * 
+     */ 
+
+    public function deletecard(Request $request, $id){
+        $user = $this->getDoctrine()-> getRepository(User::class)->find($id);
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+    
+        $response = new Response();
+        $response->send();
+    
+        }
+    
+    
 }

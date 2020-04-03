@@ -102,27 +102,7 @@ if (category) {
 
 
 
- //DELETE PLACE---------------------------------------------------------------------------------------------------------------------------------->
-
-const place = document.getElementById('place');
-
-if (place) {
-    place.addEventListener('click', e => {
-       
-       if (e.target.className === 'btn fa fa-trash delete-place'){
-         
-           if (confirm('Are you sure?')) {
-             const id = e.target.getAttribute('data-id'); 
-             
-             fetch(`/place/delete/${id}`, {
-                 method: 'DELETE'}).then( res => window.location.reload());
-           }
-       }
-    });
-}
-
-
-//DELETE CARD---------------------------------------------------------------------------------------------------------------------------------->
+//DELETE NEWS---------------------------------------------------------------------------------------------------------------------------------->
 
 const news = document.getElementById('news');
 
@@ -135,6 +115,26 @@ const news = document.getElementById('news');
               const id = e.target.getAttribute('data-id'); 
               
               fetch(`/news/delete/${id}`, {
+                  method: 'DELETE'}).then( res => window.location.reload());
+            }
+        }
+     });
+ }
+
+ 
+ //DELETE PLACE--------------------------------------------------------------------------------------------------------------------------------->
+
+ const place = document.getElementById('place');
+
+ if (place) {
+     place.addEventListener('click', e => {
+        
+        if (e.target.className === 'btn fa fa-trash delete-place'){
+          
+            if (confirm('Are you sure?')) {
+              const id = e.target.getAttribute('data-id'); 
+              
+              fetch(`/place/delete/${id}`, {
                   method: 'DELETE'}).then( res => window.location.reload());
             }
         }

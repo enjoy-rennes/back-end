@@ -113,20 +113,20 @@ class PlaceController extends AbstractController
      }
     
 
-    /**
+   /**
      * @Route("/place/delete/{id}", methods={"DELETE"}, name="place_delete")
      * 
      */ 
 
-    public function deletePlace(Request $request, $id){
-    $place = $this->getDoctrine()-> getRepository(Place::class)->find($id);
+    public function deletecard(Request $request, $id){
+        $place = $this->getDoctrine()-> getRepository(Place::class)->find($id);
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($place);
+        $entityManager->flush();
     
-    $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->remove($place);
-    $entityManager->flush();
-
-    $response = new Response();
-    $response->send();
-
-    }
+        $response = new Response();
+        $response->send();
+    
+        }
 }
