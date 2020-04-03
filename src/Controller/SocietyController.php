@@ -12,6 +12,7 @@ use App\Entity\Address;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -42,17 +43,13 @@ class SocietyController extends AbstractController
     public function addSociety(Request $request) {
 
         $society = new Society();
-       // $society->setPhone('0214256309');
-       // $society->setName('Securite sociale');
-       // $society->setType('Administration locale');
-       // $society->setWebsite('www.ameli.fr');
 
         $form = $this->createFormBuilder($society)
             ->add('phone', NumberType::class)
             ->add('name', TextType::class)
             ->add('type', TextType::class)
             ->add('website', TextType::class)
-            ->add('description', TextType::class)
+            ->add('description', TextareaType::class)
             ->add('address', EntityType::class, array(
                 'class'=>'App\Entity\Address',
                 'choice_label'=>'name',

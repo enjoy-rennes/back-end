@@ -52,6 +52,16 @@ class Society
      */
     private $news;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Place", mappedBy="society", cascade={"persist", "remove"})
+     */
+    private $place;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\GoodPlan", mappedBy="society", cascade={"persist", "remove"})
+     */
+    private $goodPlan;
+
 
     public function getId(): ?int
     {
@@ -150,6 +160,40 @@ class Society
         // set the owning side of the relation if necessary
         if ($news->getSociety() !== $this) {
             $news->setSociety($this);
+        }
+
+        return $this;
+    }
+
+    public function getPlace(): ?Place
+    {
+        return $this->place;
+    }
+
+    public function setPlace(Place $place): self
+    {
+        $this->place = $place;
+
+        // set the owning side of the relation if necessary
+        if ($place->getSociety() !== $this) {
+            $place->setSociety($this);
+        }
+
+        return $this;
+    }
+
+    public function getGoodPlan(): ?GoodPlan
+    {
+        return $this->goodPlan;
+    }
+
+    public function setGoodPlan(GoodPlan $goodPlan): self
+    {
+        $this->goodPlan = $goodPlan;
+
+        // set the owning side of the relation if necessary
+        if ($goodPlan->getSociety() !== $this) {
+            $goodPlan->setSociety($this);
         }
 
         return $this;

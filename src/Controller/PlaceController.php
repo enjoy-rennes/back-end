@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity;
 use App\Entity\Society;
-use App\Entity\News;
+use App\Entity\Place;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,26 +17,26 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class NewsController extends AbstractController
+class PlaceController extends AbstractController
 {
     /**
-     * @Route("/news_list", methods={"GET"}, name="news_list")
+     * @Route("/place_list", methods={"GET"}, name="place_list")
      * 
      */ 
     public function index() {
 
-        $news= $this->getDoctrine()->getRepository
-        (News::class)->findAll();
+        $place= $this->getDoctrine()->getRepository
+        (Place::class)->findAll();
 
-        return $this->render('news/index.html.twig', array ('news' => $news));
+        return $this->render('place/index.html.twig', array ('place' => $place));
      }
     
     /**
-     * @Route("/news/add", name="news_add")
+     * @Route("/place/add", name="place_add")
      */
-    public function addNews(Request $request) {
-        $news = new News();
-        $form = $this->createFormBuilder($news)
+    public function addPlace(Request $request) {
+        $place = new Place();
+        $form = $this->createFormBuilder($place)
             ->add('name', TextType::class)
             ->add('date', DateType::class)
             ->add('description', TextAreaType::class)
@@ -46,18 +46,18 @@ class NewsController extends AbstractController
                 'expanded'=>false,
                 'multiple'=>false
             ))
-            ->add('save', SubmitType::class, ['label' => 'Ajouter une actualité'])
+            ->add('save', SubmitType::class, ['label' => 'Ajouter un lieu'])
             ->getForm();
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $news = $form->getData();
+                $place = $form->getData();
                 $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($news);
+                $entityManager->persist($place);
                 $entityManager->flush();
-                return $this->redirectToRoute('news_list');
+                return $this->redirectToRoute('place_list');
             }
-            return $this->render('news/new.html.twig', [
+            return $this->render('place/new.html.twig', [
                 'form' => $form->createView(),
             ]);
     } 
@@ -65,21 +65,21 @@ class NewsController extends AbstractController
 
 
      /**
-     * @Route("/news/update/{id}", methods={"GET", "POST"}, name="news_update")
+     * @Route("/place/update/{id}", methods={"GET", "POST"}, name="place_update")
      */
-    public function updateNews(Request $request, $id) {
+    public function updatePlace(Request $request, $id) {
 
-        $news = new News();
-        $news = $this->getDoctrine()->getRepository
-       (News::class)->find($id);
+        $place = new Place();
+        $place = $this->getDoctrine()->getRepository
+       (Place::class)->find($id);
 
-        $form = $this->createFormBuilder($news)
+        $form = $this->createFormBuilder($place)
         ->add('name', TextType::class)
         ->add('date', DateType::class)
         ->add('description', TextType::class)
         ->add('society', EntityType::class, array(
             'class'=>'App\Entity\Society',
-            'choice_label'=>'type',
+            'choice_label'=>'name',
             'expanded'=>false,
             'multiple'=>false
         ))
@@ -92,37 +92,37 @@ class NewsController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
         
-                return $this->redirectToRoute('news_list');
+                return $this->redirectToRoute('place_list');
             }
 
-            return $this->render('news/update.html.twig', [
+            return $this->render('place/update.html.twig', [
                 'form' => $form->createView(),
             ]);
     }
 
 
    /**
-     * @Route("/news/{id}", name="news_show")
+     * @Route("/place/{id}", name="place_show")
      */ 
-    public function showNews($id) {
-        $news = $this->getDoctrine()->getRepository
-        (News::class)->find($id);
+    public function showPlace($id) {
+        $place = $this->getDoctrine()->getRepository
+        (Place::class)->find($id);
  
-        return $this->render('news/show.html.twig', array 
-        ('news' => $news));
+        return $this->render('place/show.html.twig', array 
+        ('place' => $place));
      }
     
 
     /**
-     * @Route("/news/delete/{id}", methods={"DELETE"}, name="news_delete")
+     * @Route("/place/delete/{id}", methods={"DELETE"}, name="place_delete")
      * 
      */ 
 
-    public function deleteNews(Request $request, $id){
-    $news = $this->getDoctrine()-> getRepository(News::class)->find($id);
+    public function deletePlace(Request $request, $id){
+    $place = $this->getDoctrine()-> getRepository(Place::class)->find($id);
     
     $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->remove($news);
+    $entityManager->remove($place);
     $entityManager->flush();
 
     $response = new Response();

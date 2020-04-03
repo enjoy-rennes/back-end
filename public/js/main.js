@@ -1,3 +1,5 @@
+
+
 //DELETE HELP---------------------------------------------------------------------------------------------------------------------------------->
 
 const help = document.getElementById('help');
@@ -16,7 +18,6 @@ if (help) {
        }
     });
 }
-
 
 
 //DELETE SOCIETY---------------------------------------------------------------------------------------------------------------------------------->
@@ -80,7 +81,6 @@ if (requirement) {
 
 
 
-
 //DELETE CATEGORY---------------------------------------------------------------------------------------------------------------------------------->
 
 const category = document.getElementById('category');
@@ -101,3 +101,42 @@ if (category) {
 }
 
 
+
+ //DELETE PLACE---------------------------------------------------------------------------------------------------------------------------------->
+
+const place = document.getElementById('place');
+
+if (place) {
+    place.addEventListener('click', e => {
+       
+       if (e.target.className === 'btn fa fa-trash delete-place'){
+         
+           if (confirm('Are you sure?')) {
+             const id = e.target.getAttribute('data-id'); 
+             
+             fetch(`/place/delete/${id}`, {
+                 method: 'DELETE'}).then( res => window.location.reload());
+           }
+       }
+    });
+}
+
+
+//DELETE CARD---------------------------------------------------------------------------------------------------------------------------------->
+
+const news = document.getElementById('news');
+
+ if (news) {
+     news.addEventListener('click', e => {
+        
+        if (e.target.className === 'btn fa fa-trash delete-news'){
+          
+            if (confirm('Are you sure?')) {
+              const id = e.target.getAttribute('data-id'); 
+              
+              fetch(`/news/delete/${id}`, {
+                  method: 'DELETE'}).then( res => window.location.reload());
+            }
+        }
+     });
+ }

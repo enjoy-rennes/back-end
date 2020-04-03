@@ -51,6 +51,11 @@ class Address
      */
     private $society;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\GoodPlan", mappedBy="address", cascade={"persist", "remove"})
+     */
+    private $goodPlan;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,6 +145,23 @@ class Address
         // set the owning side of the relation if necessary
         if ($society->getAddress() !== $this) {
             $society->setAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function getGoodPlan(): ?GoodPlan
+    {
+        return $this->goodPlan;
+    }
+
+    public function setGoodPlan(GoodPlan $goodPlan): self
+    {
+        $this->goodPlan = $goodPlan;
+
+        // set the owning side of the relation if necessary
+        if ($goodPlan->getAddress() !== $this) {
+            $goodPlan->setAddress($this);
         }
 
         return $this;

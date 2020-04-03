@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des actualités!{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ place.id }} </h1>
+<p> {{ place.name }} </p>
+<p> {{ place.date|date("m/d/Y") }} </p>
+<p> {{ place.description }} </p>
+<td> {{ place.society.name}} </td>
+
+
+<a href="/place_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}
+
+{# templates/place/show.html.twig #}

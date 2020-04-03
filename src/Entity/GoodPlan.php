@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PlaceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\GoodPlanRepository")
  */
-class Place
+class GoodPlan
 {
     /**
      * @ORM\Id()
@@ -17,14 +17,9 @@ class Place
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,15 +27,16 @@ class Place
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Society", inversedBy="place", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Society", inversedBy="goodPlan", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $society;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Card", mappedBy="place", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", inversedBy="goodPlan", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $card;
+    private $address;
 
     public function getId(): ?int
     {
@@ -55,18 +51,6 @@ class Place
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
 
         return $this;
     }
@@ -95,19 +79,14 @@ class Place
         return $this;
     }
 
-    public function getCard(): ?Card
+    public function getAddress(): ?Address
     {
-        return $this->card;
+        return $this->address;
     }
 
-    public function setCard(Card $card): self
+    public function setAddress(Address $address): self
     {
-        $this->card = $card;
-
-        // set the owning side of the relation if necessary
-        if ($card->getPlace() !== $this) {
-            $card->setPlace($this);
-        }
+        $this->address = $address;
 
         return $this;
     }

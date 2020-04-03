@@ -12,6 +12,7 @@
 <th>#</th>
 <th>Nom</th>
 <th>Description</th>
+<th> Type</th>
 <th>Actions</th>
 </tr>
 </thead>
@@ -22,6 +23,8 @@
 <td> {{ help.id }} </td>
 <td> {{ help.name }} </td>
 <td> {{ help.description}} </td>
+<td> {{ help.category.type}} </td>
+
 <td> 
 <a href="/help/{{ help.id }}" class="btn fa fa-eye"></a>
 <a href="/help/update/{{ help.id }}" class="btn fa fa-refresh"></a>
