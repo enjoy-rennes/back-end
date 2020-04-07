@@ -6,21 +6,20 @@
 
 > Symfony application
 
-## 💾 Requierements
-```sh
-symfony check:requirements
-```
-```sh
-composer require symfony/dotenv
-```
-
 ## 💾 Install
 
 ```sh
-Git pull 
+composer install
+```
+install the dependency.
+
+```sh
+symfony check:requirements
 ```
 
+```sh
 composer require symfony/dotenv
+```
 
 ## 🔨 Usage
 
@@ -39,12 +38,22 @@ DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name"
 ## Database migration
 
 ```sh
+php bin/console doctrine:database:create
+```
+Create the database.
+
+```sh
+php bin/console doctrine:migrations:version --add --all
+```
+
+```sh
 php bin/console make:migration
 ```
 
 ```sh
 php bin/console doctrine:migrations:migrate
 ```
+
 ## Routes
   -------------------------- ---------- -------- ------ ----------------------------------- 
   Name                       Method     Scheme   Host   Path                               
@@ -106,10 +115,6 @@ php bin/console doctrine:migrations:migrate
 
 ## Com
 
-
-
 👤 **NDIAYE Ibrahima**
 
 * Github: [@ndibrahima](https://github.com/ndibrahima)
-
-
