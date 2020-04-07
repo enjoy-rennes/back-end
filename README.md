@@ -43,16 +43,9 @@ php bin/console doctrine:database:create
 Create the database.
 
 ```sh
-php bin/console doctrine:migrations:version --add --all
-```
-
-```sh
-php bin/console make:migration
-```
-
-```sh
 php bin/console doctrine:migrations:migrate
 ```
+Create the table on datatbase.
 
 ## Routes
   -------------------------- ---------- -------- ------ ----------------------------------- 
