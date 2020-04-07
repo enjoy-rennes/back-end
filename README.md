@@ -48,6 +48,7 @@ php bin/console doctrine:migrations:migrate
 Create the table on datatbase.
 
 ## Routes
+```sh
   -------------------------- ---------- -------- ------ ----------------------------------- 
   Name                       Method     Scheme   Host   Path                               
  -------------------------- ---------- -------- ------ ----------------------------------- 
@@ -105,7 +106,7 @@ Create the table on datatbase.
   user_show                  ANY        ANY      ANY    /user/{id}
   login                      GET|POST   ANY      ANY    /login
  -------------------------- ---------- -------- ------ -----------------------------------
-
+```
 ## Com
 
 👤 **NDIAYE Ibrahima**
