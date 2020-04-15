@@ -21,7 +21,7 @@ use App\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class UserController extends AbstractController
+class UserController extends AbstractType
 {
     
     public function buildForm(FormBuilderInterface $builder, array $options)

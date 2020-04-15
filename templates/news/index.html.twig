@@ -23,7 +23,7 @@
 <td> {{ news.id }} </td>
 <td> {{ news.name }} </td>
 <td> {{ news.date|date('Y-m-d') }} </td> 
-<td> {{ news.description}} </td>
+<td> {{ news.description|u.truncate(40, '...')}} </td>
 <td> 
 <a href="/news/{{ news.id }}" class="btn fa fa-eye"></a>
 <a href="/news/update/{{ news.id }}" class="btn fa fa-refresh"></a>

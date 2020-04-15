@@ -24,7 +24,7 @@
 <td> {{ place.id }} </td>
 <td> {{ place.name }} </td>
 <td> {{ place.date|date('Y-m-d') }} </td> 
-<td> {{ place.description}} </td>
+<td> {{ place.description|u.truncate(40, '...')}} </td>
 <td> {{ place.society.name}} </td>
 
 <td> 

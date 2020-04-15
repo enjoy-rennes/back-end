@@ -25,7 +25,7 @@ class SocietyController extends AbstractController
     
 
    /**
-     * @Route("/society_list", methods={"GET"}, name="society_list")
+     * @Route("/society_list", methods={"GET"}, name="app_homepage")
      * 
      */ 
      public function index() {

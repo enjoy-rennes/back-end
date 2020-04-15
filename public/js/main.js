@@ -1,25 +1,3 @@
-
-
-//DELETE HELP---------------------------------------------------------------------------------------------------------------------------------->
-
-const help = document.getElementById('help');
-
-if (help) {
-    help.addEventListener('click', e => {
-       
-       if (e.target.className === 'btn fa fa-trash delete-help'){
-         
-           if (confirm('Are you sure?')) {
-             const id = e.target.getAttribute('data-id'); 
-             
-             fetch(`/help/delete/${id}`, {
-                 method: 'DELETE'}).then( res => window.location.reload());
-           }
-       }
-    });
-}
-
-
 //DELETE SOCIETY---------------------------------------------------------------------------------------------------------------------------------->
 
 const society = document.getElementById('society');
@@ -27,7 +5,7 @@ const society = document.getElementById('society');
  if (society) {
      society.addEventListener('click', e => {
         
-        if (e.target.className === 'btn fa fa-trash delete-society'){
+        if (e.target.className === 'btn fa fas fa-trash delete-society'){
           
             if (confirm('Are you sure?')) {
               const id = e.target.getAttribute('data-id'); 
@@ -39,102 +17,38 @@ const society = document.getElementById('society');
      });
  }
 
-//DELETE ADDRESS---------------------------------------------------------------------------------------------------------------------------------->
+ //DELETE ADDRESS--------------------------------------------------------------------------------------------------------------------------------->
 
- const address = document.getElementById('address');
+const address = document.getElementById('address');
 
- if (address) {
-     address.addEventListener('click', e => {
-        
-        if (e.target.className === 'btn fa fa-trash delete-address'){
-          
-            if (confirm('Are you sure?')) {
-              const id = e.target.getAttribute('data-id'); 
-              
-              fetch(`/address/delete/${id}`, {
-                  method: 'DELETE'}).then( res => window.location.reload());
-            }
-        }
-     });
- }
-
-
-
-//DELETE REQUIERMENT--------------------------------------------------------------------------------------------------------------------------------------------->
-
-const requirement = document.getElementById('requirement');
-
-if (requirement) {
-    requirement.addEventListener('click', e => {
+if (address) {
+    address.addEventListener('click', e => {
        
-       if (e.target.className === 'btn fa fa-trash delete-requirement'){
+       if (e.target.className === 'fa fa-trash delete-address'){
          
            if (confirm('Are you sure?')) {
              const id = e.target.getAttribute('data-id'); 
              
-             fetch(`/requirement/delete/${id}`, {
+             fetch(`/address/delete/${id}`, {
                  method: 'DELETE'}).then( res => window.location.reload());
            }
        }
     });
 }
 
+//DELETE RECEIPT---------------------------------------------------------------------------------------------------------------------------------->
 
+const receipt = document.getElementById('receipt');
 
-//DELETE CATEGORY---------------------------------------------------------------------------------------------------------------------------------->
-
-const category = document.getElementById('category');
-
-if (category) {
-    category.addEventListener('click', e => {
-       
-       if (e.target.className === 'btn fa fa-trash delete-category'){
-         
-           if (confirm('Are you sure?')) {
-             const id = e.target.getAttribute('data-id'); 
-             
-             fetch(`/category/delete/${id}`, {
-                 method: 'DELETE'}).then( res => window.location.reload());
-           }
-       }
-    });
-}
-
-
-
-//DELETE NEWS---------------------------------------------------------------------------------------------------------------------------------->
-
-const news = document.getElementById('news');
-
- if (news) {
-     news.addEventListener('click', e => {
+ if (receipt) {
+     receipt.addEventListener('click', e => {
         
-        if (e.target.className === 'btn fa fa-trash delete-news'){
+        if (e.target.className === 'btn fa fa-trash delete-receipt'){
           
             if (confirm('Are you sure?')) {
               const id = e.target.getAttribute('data-id'); 
               
-              fetch(`/news/delete/${id}`, {
-                  method: 'DELETE'}).then( res => window.location.reload());
-            }
-        }
-     });
- }
-
- 
- //DELETE PLACE--------------------------------------------------------------------------------------------------------------------------------->
-
- const place = document.getElementById('place');
-
- if (place) {
-     place.addEventListener('click', e => {
-        
-        if (e.target.className === 'btn fa fa-trash delete-place'){
-          
-            if (confirm('Are you sure?')) {
-              const id = e.target.getAttribute('data-id'); 
-              
-              fetch(`/place/delete/${id}`, {
+              fetch(`/receipt/delete/${id}`, {
                   method: 'DELETE'}).then( res => window.location.reload());
             }
         }

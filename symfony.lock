@@ -93,6 +93,9 @@
     "egulias/email-validator": {
         "version": "2.1.14"
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -121,7 +124,7 @@
         "version": "2.0.1"
     },
     "php": {
-        "version": "7.4"
+        "version": "7.3"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
@@ -597,6 +600,9 @@
     },
     "twig/extra-bundle": {
         "version": "v3.0.1"
+    },
+    "twig/string-extra": {
+        "version": "v3.0.3"
     },
     "twig/twig": {
         "version": "v3.0.1"

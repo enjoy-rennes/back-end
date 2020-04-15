@@ -25,12 +25,12 @@
 <td> {{ good_plan.name }} </td>
 <td> {{ good_plan.address.address }} </td>
 <td> {{ good_plan.society.name }} </td>
-<td> {{ good_plan.description}} </td>
+<td> {{ good_plan.description|u.truncate(40, '...')}} </td>
 <td> 
-<a href="/good_plan/{{ good_plan.id }}" class="btn fa fa-eye"></a>
-<a href="/good_plan/update/{{ good_plan.id }}" class="btn fa fa-refresh"></a>
-<a href="#" class="btn fa fa-trash delete-good_plan" data-id="{{ good_plan.id }}"></a>  
-<a href="/good_plan/add" class="btn fa fa-plus"></a>
+<a href="/good_plan/{{ good_plan.id }}" class="fa fa-eye"></a>
+<a href="/good_plan/update/{{ good_plan.id }}" class=" fa fa-edit"></a>
+<a href="#" class=" fa fa-trash delete-good_plan" data-id="{{ good_plan.id }}"></a>  
+<a href="/good_plan/add" class=" fa fa-plus"></a>
 
 </td>
 </tr>
