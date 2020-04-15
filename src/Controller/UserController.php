@@ -108,7 +108,7 @@ class UserController extends AbstractController
      * 
      */ 
 
-    public function deletecard(Request $request, $id){
+    public function deleteUser(Request $request, $id){
         $user = $this->getDoctrine()-> getRepository(User::class)->find($id);
         
         $entityManager = $this->getDoctrine()->getManager();
