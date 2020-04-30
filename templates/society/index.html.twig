@@ -15,7 +15,7 @@
 <th>type</th>
 <th>address</th>
 <th> description</th>
-<th>website</th>
+{#<th>website</th>#}
 <th>Actions</th>
 </tr>
 </thead>
@@ -29,7 +29,7 @@
 <td> {{ society.type }} </td>
 <td> {{ society.address.name }} </td>
 <td> {{ society.description|u.truncate(40, '...')}} </td>
-<td> {{ society.website }} </td>
+{#<td> {{ society.website }} </td>#}
 
 <td> 
 <a href="/society/{{ society.id }}" class="fa fa-eye"></a>
