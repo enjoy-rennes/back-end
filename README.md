@@ -49,15 +49,16 @@ Create the table on datatbase.
 
 ## Routes
 ```sh
-  -------------------------- ---------- -------- ------ ----------------------------------- 
-  Name                       Method     Scheme   Host   Path                               
  -------------------------- ---------- -------- ------ ----------------------------------- 
+  Name                       Method     Scheme   Host   Path                               
+ -------------------------- ---------- -------- ------ -----------------------------------   
   address_list               GET        ANY      ANY    /address_list
   address_add                ANY        ANY      ANY    /address/add
   address_update             GET|POST   ANY      ANY    /address/update/{id}
   address_show               ANY        ANY      ANY    /address/{id}
   address_delete             DELETE     ANY      ANY    /address/delete/{id}
   card_list                  GET        ANY      ANY    /card_list
+  shop                       GET        ANY      ANY    /shop
   card_add                   ANY        ANY      ANY    /card/add
   card_update                GET|POST   ANY      ANY    /card/update/{id}
   card_show                  ANY        ANY      ANY    /card/{id}
@@ -83,6 +84,7 @@ Create the table on datatbase.
   news_update                GET|POST   ANY      ANY    /news/update/{id}
   news_show                  ANY        ANY      ANY    /news/{id}
   news_delete                DELETE     ANY      ANY    /news/delete/{id}
+  payment                    ANY        ANY      ANY    /payment
   place_list                 GET        ANY      ANY    /place_list
   place_add                  ANY        ANY      ANY    /place/add
   place_update               GET|POST   ANY      ANY    /place/update/{id}
@@ -97,15 +99,18 @@ Create the table on datatbase.
   app_login                  ANY        ANY      ANY    /login
   app_logout                 ANY        ANY      ANY    /logout
   show_society               ANY        ANY      ANY    /show/society
-  society_list               GET        ANY      ANY    /society_list
+  app_homepage               GET        ANY      ANY    /society_list
   society_add                ANY        ANY      ANY    /society/add
   society_update             GET|POST   ANY      ANY    /society/update/{id}
   society_show               ANY        ANY      ANY    /society/{id}
   society_delete             DELETE     ANY      ANY    /society/delete/{id}
   user_list                  ANY        ANY      ANY    /user
   user_show                  ANY        ANY      ANY    /user/{id}
+  user_update                GET|POST   ANY      ANY    /user/update/{id}
+  user_delete                DELETE     ANY      ANY    /user/delete/{id}
   login                      GET|POST   ANY      ANY    /login
  -------------------------- ---------- -------- ------ -----------------------------------
+
 ```
 ## Com
 

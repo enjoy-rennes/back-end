@@ -31,6 +31,18 @@ class CardController extends AbstractController
 
         return $this->render('card/index.html.twig', array ('card' => $card));
      }
+
+     /**
+     * @Route("/shop", methods={"GET"}, name="shop")
+     * 
+     */ 
+    public function Shop() {
+
+        $card= $this->getDoctrine()->getRepository
+        (Card::class)->findAll();
+
+        return $this->render('card/shop.html.twig', array ('card' => $card));
+     }
     
     /**
      * @Route("/card/add", name="card_add")

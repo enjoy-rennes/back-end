@@ -1,0 +1,64 @@
+
+{% block title %}La liste des cartes{% endblock %}
+
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+{% block body %}
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+<div class="card" style="width: 18rem;" align="center">
+  <img src="https://www.sncf.com/sites/default/files/styles/media_crop_3_2/public/2017-10/packshot_carte-voyageur.png?h=1206bed1&itok=IH61HVdX" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Carte de réduction</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="/payment" class="btn btn-primary">Acheter</a>
+  </div>
+</div>
+</br>
+<br>
+</br>
+<div class="card" style="width: 18rem;" align="center">
+  <img src="https://www.cineode.fr/poligny/evenement/40472380_1803228556392353_7901001720094785536_n.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Carte Enjoy Rennes</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="/payment" class="btn btn-primary">Acheter</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+{% endblock %}
+
+<script src="https://js.stripe.com/v3/"></script>
+
+{% block javascripts %}
+
+<script>
+{% endblock %}
+</html>

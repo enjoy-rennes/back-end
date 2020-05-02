@@ -242,6 +242,9 @@
             "./config/packages/security_checker.yaml"
         ]
     },
+    "stripe/stripe-php": {
+        "version": "v7.30.0"
+    },
     "symfony/asset": {
         "version": "v5.0.2"
     },
