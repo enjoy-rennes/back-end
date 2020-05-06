@@ -49,9 +49,10 @@ Create the table on datatbase.
 
 ## Routes
 ```sh
+ 
  -------------------------- ---------- -------- ------ ----------------------------------- 
   Name                       Method     Scheme   Host   Path                               
- -------------------------- ---------- -------- ------ -----------------------------------   
+ -------------------------- ---------- -------- ------ ----------------------------------- 
   address_list               GET        ANY      ANY    /address_list
   address_add                ANY        ANY      ANY    /address/add
   address_update             GET|POST   ANY      ANY    /address/update/{id}
@@ -70,11 +71,13 @@ Create the table on datatbase.
   category_delete            DELETE     ANY      ANY    /category/delete/{id}
   contact                    ANY        ANY      ANY    /contact
   good_plan_list             GET        ANY      ANY    /good_plan_list
+  good_plan_five             GET        ANY      ANY    /good_plan_five
   good_plan_add              ANY        ANY      ANY    /good_plan/add
   good_plan_update           GET|POST   ANY      ANY    /good_plan/update/{id}
   good_plan_show             ANY        ANY      ANY    /good_plan/{id}
   good_plan_delete           DELETE     ANY      ANY    /good_plan/delete/{id}
   help_list                  GET        ANY      ANY    /help_list
+  help_five                  GET        ANY      ANY    /help_five
   help_add                   ANY        ANY      ANY    /help/add
   help_update                GET|POST   ANY      ANY    /help/update/{id}
   help_show                  ANY        ANY      ANY    /help/{id}

@@ -31,6 +31,19 @@ class HelpController extends AbstractController
 
         return $this->render('help/index.html.twig', array ('help' => $help));
      }
+
+      /**
+     * @Route("/help_five", methods={"GET"}, name="help_five")
+     * 
+     */ 
+    public function Help_five() {
+
+        $help= $this->getDoctrine()->getRepository
+        (Help::class)->findById(array(4,8,12,21,7));
+
+        return $this->render('help/index.html.twig', array ('help' => $help));
+     }
+
     
     /**
      * @Route("/help/add", name="help_add")

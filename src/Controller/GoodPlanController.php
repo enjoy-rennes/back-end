@@ -32,6 +32,18 @@ class GoodPlanController extends AbstractController
 
         return $this->render('good_plan/index.html.twig', array ('good_plan' => $good_plan));
      }
+
+      /**
+     * @Route("/good_plan_five", methods={"GET"}, name="good_plan_five")
+     * 
+     */ 
+    public function GoodPlanFive() {
+
+        $good_plan= $this->getDoctrine()->getRepository
+        (Goodplan::class)->findById(array(2,3,4,5,6));
+
+        return $this->render('good_plan/index.html.twig', array ('good_plan' => $good_plan));
+     }
     
     /**
      * @Route("/good_plan/add", name="good_plan_add")
