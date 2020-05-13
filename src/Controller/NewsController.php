@@ -30,6 +30,18 @@ class NewsController extends AbstractController
 
         return $this->render('news/index.html.twig', array ('news' => $news));
      }
+
+     /**
+     * @Route("/news_five", methods={"GET"}, name="news_five")
+     * 
+     */ 
+    public function NewsFive() {
+
+        $news= $this->getDoctrine()->getRepository
+        (News::class)->findById(array(1,2,3,4,5));
+
+        return $this->render('news/index.html.twig', array ('news' => $news));
+     }
     
     /**
      * @Route("/news/add", name="news_add")
