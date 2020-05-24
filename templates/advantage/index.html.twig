@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des bon plans{% endblock %}
+
+{% block body %}
+
+{% if advantage %}
+<h1> Liste des bon plans</h1>
+<table id="advantage" class="table table-striped"> 
+<thead>
+<tr>
+<th>#</th>
+<th>Nom</th>
+<th>Description</th>
+<th> Tag </th>
+<th>Societé</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody> 
+
+{% for advantage in advantage %}
+<tr> 
+<td> {{ advantage.id }} </td>
+<td> {{ advantage.name }} </td>
+<td> {{ advantage.description|u.truncate(40, '...')}} </td>
+
+
+{% for advantage in advantage.getTag %}
+<td> {{ advantage.name }}</td>
+{% endfor %}
+
+{% for advantage in advantage.getSociety %}
+<td> {{ advantage.name }}</td>
+{% endfor %}
+
+
+
+<td> 
+<a href="/advantage/{{ advantage.id }}" class="fa fa-eye"></a>
+<a href="/advantage/update/{{ advantage.id }}" class=" fa fa-edit"></a>
+<a href="#" class=" fa fa-trash delete-advantage" data-id="{{ advantage.id }}"></a>  
+<a href="/advantage/add" class=" fa fa-plus"></a>
+
+</td>
+</tr>
+ {% endfor %}
+</tbody>
+</table>
+{% else  %}
+<p> La liste des bon plan est vide</p>
+
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="/js/main2.js">  </script>
+
+{% endblock %}
+

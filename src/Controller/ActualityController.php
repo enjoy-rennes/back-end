@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity;
 use App\Entity\Society;
-use App\Entity\News;
+use App\Entity\Actuality;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,38 +17,26 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class NewsController extends AbstractController
+class ActualityController extends AbstractController
 {
     /**
-     * @Route("/news_list", methods={"GET"}, name="news_list")
+     * @Route("/actuality_list", methods={"GET"}, name="actuality_list")
      * 
      */ 
     public function index() {
 
-        $news= $this->getDoctrine()->getRepository
-        (News::class)->findAll();
+        $actuality= $this->getDoctrine()->getRepository
+        (actuality::class)->findAll();
 
-        return $this->render('news/index.html.twig', array ('news' => $news));
-     }
-
-     /**
-     * @Route("/news_five", methods={"GET"}, name="news_five")
-     * 
-     */ 
-    public function NewsFive() {
-
-        $news= $this->getDoctrine()->getRepository
-        (News::class)->findById(array(1,2,3,4,5));
-
-        return $this->render('news/index.html.twig', array ('news' => $news));
+        return $this->render('actuality/index.html.twig', array ('actuality' => $actuality));
      }
     
     /**
-     * @Route("/news/add", name="news_add")
+     * @Route("/actuality/add", name="actuality_add")
      */
-    public function addNews(Request $request) {
-        $news = new News();
-        $form = $this->createFormBuilder($news)
+    public function addactuality(Request $request) {
+        $actuality = new actuality();
+        $form = $this->createFormBuilder($actuality)
             ->add('name', TextType::class)
             ->add('date', DateType::class)
             ->add('description', TextAreaType::class)
@@ -63,13 +51,13 @@ class NewsController extends AbstractController
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $news = $form->getData();
+                $actuality = $form->getData();
                 $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($news);
+                $entityManager->persist($actuality);
                 $entityManager->flush();
-                return $this->redirectToRoute('news_list');
+                return $this->redirectToRoute('actuality_list');
             }
-            return $this->render('news/new.html.twig', [
+            return $this->render('actuality/new.html.twig', [
                 'form' => $form->createView(),
             ]);
     } 
@@ -77,21 +65,21 @@ class NewsController extends AbstractController
 
 
      /**
-     * @Route("/news/update/{id}", methods={"GET", "POST"}, name="news_update")
+     * @Route("/actuality/update/{id}", methods={"GET", "POST"}, name="actuality_update")
      */
-    public function updateNews(Request $request, $id) {
+    public function updateactuality(Request $request, $id) {
 
-        $news = new News();
-        $news = $this->getDoctrine()->getRepository
-       (News::class)->find($id);
+        $actuality = new actuality();
+        $actuality = $this->getDoctrine()->getRepository
+       (actuality::class)->find($id);
 
-        $form = $this->createFormBuilder($news)
+        $form = $this->createFormBuilder($actuality)
         ->add('name', TextType::class)
         ->add('date', DateType::class)
         ->add('description', TextType::class)
         ->add('society', EntityType::class, array(
             'class'=>'App\Entity\Society',
-            'choice_label'=>'type',
+            'choice_label'=>'name',
             'expanded'=>false,
             'multiple'=>false
         ))
@@ -104,37 +92,37 @@ class NewsController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
         
-                return $this->redirectToRoute('news_list');
+                return $this->redirectToRoute('actuality_list');
             }
 
-            return $this->render('news/update.html.twig', [
+            return $this->render('actuality/update.html.twig', [
                 'form' => $form->createView(),
             ]);
     }
 
 
    /**
-     * @Route("/news/{id}", name="news_show")
+     * @Route("/actuality/{id}", name="actuality_show")
      */ 
-    public function showNews($id) {
-        $news = $this->getDoctrine()->getRepository
-        (News::class)->find($id);
+    public function showactuality($id) {
+        $actuality = $this->getDoctrine()->getRepository
+        (actuality::class)->find($id);
  
-        return $this->render('news/show.html.twig', array 
-        ('news' => $news));
+        return $this->render('actuality/show.html.twig', array 
+        ('actuality' => $actuality));
      }
     
 
     /**
-     * @Route("/news/delete/{id}", methods={"DELETE"}, name="news_delete")
+     * @Route("/actuality/delete/{id}", methods={"DELETE"}, name="actuality_delete")
      * 
      */ 
 
-    public function deleteNews(Request $request, $id){
-    $news = $this->getDoctrine()-> getRepository(News::class)->find($id);
+    public function deleteactuality(Request $request, $id){
+    $actuality = $this->getDoctrine()-> getRepository(actuality::class)->find($id);
     
     $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->remove($news);
+    $entityManager->remove($actuality);
     $entityManager->flush();
 
     $response = new Response();

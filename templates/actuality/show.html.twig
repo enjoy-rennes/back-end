@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des actualités!{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ actuality.id }} </h1>
+<p> {{ actuality.name }} </p>
+<p> {{ actuality.date|date("m/d/Y") }} </p>
+<p> {{ actuality.description }} </p>
+<p> {{actuality.society.name }} </p>
+
+<a href="/news_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}
+
+{# templates/actuality/show.html.twig #}

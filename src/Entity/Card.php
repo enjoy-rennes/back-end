@@ -21,16 +21,17 @@ class Card
      */
     private $name;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Place", inversedBy="card", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $place;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $description;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Society", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $society;
 
     public function getId(): ?int
     {
@@ -49,17 +50,7 @@ class Card
         return $this;
     }
 
-    public function getPlace(): ?Place
-    {
-        return $this->place;
-    }
 
-    public function setPlace(Place $place): self
-    {
-        $this->place = $place;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -69,6 +60,18 @@ class Card
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSociety(): ?Society
+    {
+        return $this->society;
+    }
+
+    public function setSociety(Society $society): self
+    {
+        $this->society = $society;
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,20 +49,36 @@ class Society
      */
     private $address;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\News", mappedBy="society", cascade={"persist", "remove"})
-     */
-    private $news;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Place", mappedBy="society", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Card", cascade={"persist", "remove"})
      */
-    private $place;
+    private $card;
+
+    
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\GoodPlan", mappedBy="society", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Actuality", cascade={"persist", "remove"})
      */
-    private $goodPlan;
+    private $actuality;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Help", mappedBy="society")
+     */
+    private $helps;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Advantage", mappedBy="society")
+     */
+    private $advantages;
+
+
+    public function __construct()
+    {
+        $this->helps = new ArrayCollection();
+        $this->advantages = new ArrayCollection();
+    }
+
 
 
     public function getId(): ?int
@@ -148,56 +166,90 @@ class Society
         return $this;
     }
 
-    public function getNews(): ?News
+    public function getCard(): ?Card
     {
-        return $this->news;
+        return $this->card;
     }
 
-    public function setNews(News $news): self
+    public function setCard(?Card $card): self
     {
-        $this->news = $news;
+        $this->card = $card;
 
-        // set the owning side of the relation if necessary
-        if ($news->getSociety() !== $this) {
-            $news->setSociety($this);
+        return $this;
+    }
+
+    
+
+    public function getActuality(): ?Actuality
+    {
+        return $this->actuality;
+    }
+
+    public function setActuality(?Actuality $actuality): self
+    {
+        $this->actuality = $actuality;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Help[]
+     */
+    public function getHelps(): Collection
+    {
+        return $this->helps;
+    }
+
+    public function addHelp(Help $help): self
+    {
+        if (!$this->helps->contains($help)) {
+            $this->helps[] = $help;
+            $help->addSociety($this);
         }
 
         return $this;
     }
 
-    public function getPlace(): ?Place
+    public function removeHelp(Help $help): self
     {
-        return $this->place;
-    }
-
-    public function setPlace(Place $place): self
-    {
-        $this->place = $place;
-
-        // set the owning side of the relation if necessary
-        if ($place->getSociety() !== $this) {
-            $place->setSociety($this);
+        if ($this->helps->contains($help)) {
+            $this->helps->removeElement($help);
+            $help->removeSociety($this);
         }
 
         return $this;
     }
 
-    public function getGoodPlan(): ?GoodPlan
+    /**
+     * @return Collection|Advantage[]
+     */
+    public function getAdvantages(): Collection
     {
-        return $this->goodPlan;
+        return $this->advantages;
     }
 
-    public function setGoodPlan(GoodPlan $goodPlan): self
+    public function addAdvantage(Advantage $advantage): self
     {
-        $this->goodPlan = $goodPlan;
-
-        // set the owning side of the relation if necessary
-        if ($goodPlan->getSociety() !== $this) {
-            $goodPlan->setSociety($this);
+        if (!$this->advantages->contains($advantage)) {
+            $this->advantages[] = $advantage;
+            $advantage->addSociety($this);
         }
 
         return $this;
     }
+
+    public function removeAdvantage(Advantage $advantage): self
+    {
+        if ($this->advantages->contains($advantage)) {
+            $this->advantages->removeElement($advantage);
+            $advantage->removeSociety($this);
+        }
+
+        return $this;
+    }
+
+   
+
 
     
 }

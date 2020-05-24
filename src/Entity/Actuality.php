@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ActualityRepository")
  */
-class News
+class Actuality
 {
     /**
      * @ORM\Id()
@@ -21,22 +21,20 @@ class News
      */
     private $name;
 
-     /**
-     * @ORM\Column(type="date")
-     */
-    private $date;
-    
-   /**
-     * @ORM\Column(type="string", length=255)
+    /**
+     * @ORM\Column(type="string", length=500)
      */
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Society", inversedBy="news", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Society", cascade={"persist", "remove"})
      */
     private $society;
-
 
     public function getId(): ?int
     {
@@ -55,18 +53,6 @@ class News
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -79,17 +65,27 @@ class News
         return $this;
     }
 
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
     public function getSociety(): ?Society
     {
         return $this->society;
     }
 
-    public function setSociety(Society $society): self
+    public function setSociety(?Society $society): self
     {
         $this->society = $society;
 
         return $this;
     }
-
-   
 }

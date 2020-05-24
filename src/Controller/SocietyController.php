@@ -23,12 +23,25 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class SocietyController extends AbstractController
 {
     
+    /**
+     * @Route("/place_list", methods={"GET"}, name="place_list")
+     * 
+     */ 
+    
+    public function PlaceDiscover() {
+
+        $society= $this->getDoctrine()->getRepository
+        (Society::class)->findById(array(6,1,5,9,14));
+
+        return $this->render('society/index.html.twig', array ('society' => $society));
+     }
+
 
    /**
      * @Route("/society_list", methods={"GET"}, name="app_homepage")
      * 
      */ 
-     public function index() {
+     public function SocietyList() {
 
         $society= $this->getDoctrine()->getRepository
         (Society::class)->findAll();
@@ -40,7 +53,7 @@ class SocietyController extends AbstractController
     /**
      * @Route("/society/add", name="society_add")
      */
-    public function addSociety(Request $request) {
+    public function AddSociety(Request $request) {
 
         $society = new Society();
 
@@ -71,7 +84,7 @@ class SocietyController extends AbstractController
                 $entityManager->persist($society);
                 $entityManager->flush();
         
-                return $this->redirectToRoute('society_list');
+                return $this->redirectToRoute('app_homepage');
             }
 
             return $this->render('society/new.html.twig', [
@@ -83,7 +96,7 @@ class SocietyController extends AbstractController
      /**
      * @Route("/society/update/{id}", methods={"GET", "POST"}, name="society_update")
      */
-    public function updateSociety(Request $request, $id) {
+    public function UpdateSociety(Request $request, $id) {
 
         $society = new Society();
         $society = $this->getDoctrine()->getRepository
@@ -95,6 +108,13 @@ class SocietyController extends AbstractController
             ->add('name', TextType::class)
             ->add('type', TextType::class)
             ->add('website', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('address', EntityType::class, array(
+                'class'=>'App\Entity\Address',
+                'choice_label'=>'name',
+                'expanded'=>false,
+                'multiple'=>false
+            ))
             ->add('save', SubmitType::class, ['label' => 'Modfier la société'])
             ->getForm();
 
@@ -104,7 +124,7 @@ class SocietyController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
         
-                return $this->redirectToRoute('society_list');
+                return $this->redirectToRoute('app_homepage');
             }
 
             return $this->render('society/update.html.twig', [
@@ -117,7 +137,7 @@ class SocietyController extends AbstractController
     /**
      * @Route("/society/{id}", name="society_show")
      */ 
-    public function showSociety($id) {
+    public function ShowSociety($id) {
        $society = $this->getDoctrine()->getRepository
        (Society::class)->find($id);
 
@@ -132,7 +152,7 @@ class SocietyController extends AbstractController
      * 
      */ 
 
-    public function deleteSociety(Request $request, $id){
+    public function DeleteSociety(Request $request, $id){
     $society = $this->getDoctrine()-> getRepository(Society::class)->find($id);
     
     $entityManager = $this->getDoctrine()->getManager();

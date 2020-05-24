@@ -8,9 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity;
 use App\Entity\Help;
-use App\Entity\Category;
+use App\Entity\Tag;
+use App\Entity\Requirement;
+use App\Entity\Society;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -53,11 +54,23 @@ class HelpController extends AbstractController
         $form = $this->createFormBuilder($help)
             ->add('name', TextType::class)
             ->add('description', TextType::class)
-            ->add('category', EntityType::class, array(
-                'class'=>'App\Entity\Category',
-                'choice_label'=>'type',
+            ->add('tag', EntityType::class, array(
+                'class'=>'App\Entity\Tag',
+                'choice_label'=>'name',
                 'expanded'=>false,
-                'multiple'=>false
+                'multiple'=>true
+            ))
+            ->add('society', EntityType::class, array(
+                'class'=>'App\Entity\Society',
+                'choice_label'=>'name',
+                'expanded'=>false,
+                'multiple'=>true
+            ))
+            ->add('requirement', EntityType::class, array(
+                'class'=>'App\Entity\Requirement',
+                'choice_label'=>'name',
+                'expanded'=>false,
+                'multiple'=>true
             ))
             ->add('save', SubmitType::class, ['label' => 'Ajouter une aide'])
             ->getForm();
@@ -87,13 +100,25 @@ class HelpController extends AbstractController
        (Help::class)->find($id);
 
         $form = $this->createFormBuilder($help)
-        ->add('name', TextType::class)
-        ->add('description', TextType::class)
-        ->add('category', EntityType::class, array(
-            'class'=>'App\Entity\Category',
-            'choice_label'=>'type',
+        ->add('name', TextType::class,  array('data_class' => null))
+        ->add('description', TextType::class,  array('data_class' => null))
+        ->add('tag', EntityType::class, array(
+            'class'=>'App\Entity\Tag',
+            'choice_label'=>'name',
             'expanded'=>false,
-            'multiple'=>false
+            'multiple'=>true
+        ))
+        ->add('society', EntityType::class, array(
+            'class'=>'App\Entity\Society',
+            'choice_label'=>'name',
+            'expanded'=>false,
+            'multiple'=>true
+        ))
+        ->add('requirement', EntityType::class, array(
+            'class'=>'App\Entity\Requirement',
+            'choice_label'=>'name',
+            'expanded'=>false,
+            'multiple'=>true
         ))
         ->add('save', SubmitType::class, ['label' => 'Modifier'])
         ->getForm();

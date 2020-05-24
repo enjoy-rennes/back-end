@@ -12,7 +12,9 @@
 <th>#</th>
 <th>Nom</th>
 <th>Description</th>
-<th> Type</th>
+<th> Requirement </th>
+<th> Societé </th>
+<th> Tag </th>
 <th>Actions</th>
 </tr>
 </thead>
@@ -23,7 +25,20 @@
 <td> {{ help.id }} </td>
 <td> {{ help.name }} </td>
 <td> {{ help.description|u.truncate(70, '...')}} </td>
-<td> {{ help.category.type}} </td>
+
+{% for  help in help.getRequirement %}
+ <td> {{ help.name }} </td>
+ {% endfor %}
+
+{% for  help in help.getSociety %}
+ <td> {{ help.name }} </td>
+ {% endfor %}
+
+{% for  help in help.getTag %}
+ <td> {{ help.name }} </td>
+ {% endfor %}
+
+
 
 <td> 
 <a href="/help/{{ help.id }}" class="fa fa-eye"></a>

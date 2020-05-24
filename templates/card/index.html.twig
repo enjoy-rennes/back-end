@@ -11,8 +11,8 @@
 <tr>
 <th>#</th>
 <th>Nom</th>
-<th>Lieu</th>
 <th>Description</th>
+<th>Societé </th>
 <th>Actions</th>
 </tr>
 </thead>
@@ -22,8 +22,9 @@
 <tr> 
 <td> {{ card.id }} </td>
 <td> {{ card.name }} </td>
-<td> {{ card.place.name }} </td>
 <td> {{ card.description|u.truncate(40, '...')}} </td>
+<td> {{ card.society.name }} </td>
+
 <td> 
 <a href="/card/{{ card.id }}" class=" fa fa-eye"></a>
 <a href="/card/update/{{ card.id }}" class=" fa fa-edit"></a>

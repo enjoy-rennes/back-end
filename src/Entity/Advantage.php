@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\HelpRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AdvantageRepository")
  */
-class Help
+class Advantage
 {
     /**
      * @ORM\Id()
@@ -18,49 +18,42 @@ class Help
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=500)
      */
     private $description;
 
-
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Requirement", inversedBy="helps")
-     */
-    private $requirement;
-
+    
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="helps")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="advantages")
      */
     private $tag;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Society", inversedBy="helps")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Society", inversedBy="advantages")
      */
     private $society;
 
+
+
+
     public function __construct()
     {
-        $this->requirement = new ArrayCollection();
+
         $this->tag = new ArrayCollection();
         $this->society = new ArrayCollection();
     }
-
-    
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
 
     public function getName(): ?string
     {
@@ -86,34 +79,6 @@ class Help
         return $this;
     }
 
-    
-    /**
-     * @return Collection|Requirement[]
-     */
-    public function getRequirement(): Collection
-    {
-        return $this->requirement;
-    }
-
-    public function addRequirement(Requirement $requirement): self
-    {
-        if (!$this->requirement->contains($requirement)) {
-            $this->requirement[] = $requirement;
-        }
-
-        return $this;
-    }
-
-    public function removeRequirement(Requirement $requirement): self
-    {
-        if ($this->requirement->contains($requirement)) {
-            $this->requirement->removeElement($requirement);
-        }
-
-        return $this;
-    }
-
-    
 
     /**
      * @return Collection|Tag[]
@@ -122,10 +87,6 @@ class Help
     {
         return $this->tag;
     }
-
-    
-
-    
 
     public function addTag(Tag $tag): self
     {

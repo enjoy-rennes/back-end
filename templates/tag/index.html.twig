@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des tags {% endblock %}
+
+{% block body %}
+
+{% if tag %}
+<h1> Liste des tags</h1>
+<table id="tag" class="table table-striped"> 
+<thead>
+<tr>
+<th>#</th>
+<th>Type</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody> 
+
+{% for tag in tag %}
+<tr> 
+<td> {{ tag.id }} </td>
+<td> {{ tag.name }} </td>
+
+<td> 
+<a href="/tag/{{ tag.id }}" class="fa fa-eye"></a>
+
+<a href="/tag/update/{{ tag.id }}" class=" fa fa-edit"></a>
+
+<a href="#" class=" fa fa-trash delete-tag" data-id="{{ tag.id }}"></a> 
+
+<a href="/tag/add" class=" fa fa-plus"></a>
+
+</td>
+</tr>
+ {% endfor %}
+</tbody>
+</table>
+{% else  %}
+<p> La liste des catégories est vide</p>
+
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="/js/main.js">  </script>
+
+{% endblock %}
+
+

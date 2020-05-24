@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class Requirement
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $value;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Help", mappedBy="requirement")
+     */
+    private $helps;
+
+    public function __construct()
+    {
+        $this->helps = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +97,34 @@ class Requirement
     public function setValue(?string $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Help[]
+     */
+    public function getHelps(): Collection
+    {
+        return $this->helps;
+    }
+
+    public function addHelp(Help $help): self
+    {
+        if (!$this->helps->contains($help)) {
+            $this->helps[] = $help;
+            $help->addRequirement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHelp(Help $help): self
+    {
+        if ($this->helps->contains($help)) {
+            $this->helps->removeElement($help);
+            $help->removeRequirement($this);
+        }
 
         return $this;
     }

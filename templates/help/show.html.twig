@@ -8,7 +8,18 @@
 <p> {{ help.name }} </p>
 <p> {{ help.description }} </p>
 
-<p> {{ help.category.type }} </p>
+{% for  help in help.getRequirement %}
+ <td> {{ help.name }} </td>
+ {% endfor %}
+
+{% for  help in help.getSociety %}
+ <td> {{ help.name }} </td>
+ {% endfor %}
+
+{% for  help in help.getTag %}
+ <td> {{ help.name }} </td>
+ {% endfor %}
+
 
 <a href="/help_list" class="btn 
 btn-dark">Retour</a>

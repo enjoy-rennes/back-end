@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des tags !{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ tag.id }} </h1>
+<p> {{ tag.name }} </p>
+
+<a href="/tag_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}
+
+{# templates/tag/show.html.twig #}

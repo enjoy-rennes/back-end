@@ -52,8 +52,8 @@ class CardController extends AbstractController
         $form = $this->createFormBuilder($card)
             ->add('name', TextType::class)
             ->add('description', TextType::class)
-            ->add('place', EntityType::class, array(
-                'class'=>'App\Entity\Place',
+            ->add('society', EntityType::class, array(
+                'class'=>'App\Entity\Society',
                 'choice_label'=>'name',
                 'expanded'=>false,
                 'multiple'=>false
@@ -88,8 +88,8 @@ class CardController extends AbstractController
         $form = $this->createFormBuilder($card)
         ->add('name', TextType::class)
         ->add('description', TextType::class)
-        ->add('place', EntityType::class, array(
-            'class'=>'App\Entity\Place',
+        ->add('society', EntityType::class, array(
+            'class'=>'App\Entity\Society',
             'choice_label'=>'name',
             'expanded'=>false,
             'multiple'=>false

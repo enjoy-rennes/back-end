@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des bon plans !{% endblock %}
+
+{% block body %}
+ 
+<h1> {{ advantage.id }} </h1>
+<p> {{ advantage.name }} </p>
+<p> {{ advantage.description }} </p>
+{% for advantage in advantage.getSociety %}
+<p> {{ advantage.name }}</p>
+{% endfor %}
+
+<a href="/advantage_list" class="btn 
+btn-dark">Retour</a>
+
+{% endblock %}
+
+{# templates/advantage/show.html.twig #}
