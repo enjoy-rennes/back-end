@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,10 +34,16 @@ class Actuality
     private $date;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Society", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Society", inversedBy="actualities")
      */
     private $society;
 
+    public function __construct()
+    {
+        $this->society = new ArrayCollection();
+    }
+
+ 
     public function getId(): ?int
     {
         return $this->id;
@@ -77,15 +85,31 @@ class Actuality
         return $this;
     }
 
-    public function getSociety(): ?Society
+    /**
+     * @return Collection|Society[]
+     */
+    public function getSociety(): Collection
     {
         return $this->society;
     }
 
-    public function setSociety(?Society $society): self
+    public function addSociety(Society $society): self
     {
-        $this->society = $society;
+        if (!$this->society->contains($society)) {
+            $this->society[] = $society;
+        }
 
         return $this;
     }
+
+    public function removeSociety(Society $society): self
+    {
+        if ($this->society->contains($society)) {
+            $this->society->removeElement($society);
+        }
+
+        return $this;
+    }
+
+
 }

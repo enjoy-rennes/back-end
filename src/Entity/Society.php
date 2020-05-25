@@ -51,18 +51,6 @@ class Society
 
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Card", cascade={"persist", "remove"})
-     */
-    private $card;
-
-    
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Actuality", cascade={"persist", "remove"})
-     */
-    private $actuality;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Help", mappedBy="society")
      */
     private $helps;
@@ -72,11 +60,23 @@ class Society
      */
     private $advantages;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Card", mappedBy="society")
+     */
+    private $cards;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Actuality", mappedBy="society")
+     */
+    private $actualities;
+
 
     public function __construct()
     {
         $this->helps = new ArrayCollection();
         $this->advantages = new ArrayCollection();
+        $this->cards = new ArrayCollection();
+        $this->actualities = new ArrayCollection();
     }
 
 
@@ -166,31 +166,8 @@ class Society
         return $this;
     }
 
-    public function getCard(): ?Card
-    {
-        return $this->card;
-    }
 
-    public function setCard(?Card $card): self
-    {
-        $this->card = $card;
 
-        return $this;
-    }
-
-    
-
-    public function getActuality(): ?Actuality
-    {
-        return $this->actuality;
-    }
-
-    public function setActuality(?Actuality $actuality): self
-    {
-        $this->actuality = $actuality;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Help[]
@@ -243,6 +220,62 @@ class Society
         if ($this->advantages->contains($advantage)) {
             $this->advantages->removeElement($advantage);
             $advantage->removeSociety($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Card[]
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards[] = $card;
+            $card->addSociety($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        if ($this->cards->contains($card)) {
+            $this->cards->removeElement($card);
+            $card->removeSociety($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Actuality[]
+     */
+    public function getActualities(): Collection
+    {
+        return $this->actualities;
+    }
+
+    public function addActuality(Actuality $actuality): self
+    {
+        if (!$this->actualities->contains($actuality)) {
+            $this->actualities[] = $actuality;
+            $actuality->addSociety($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActuality(Actuality $actuality): self
+    {
+        if ($this->actualities->contains($actuality)) {
+            $this->actualities->removeElement($actuality);
+            $actuality->removeSociety($this);
         }
 
         return $this;
