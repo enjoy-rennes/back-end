@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class TagController extends AbstractController
 {
      /**
-     * @Route("/tag_list", methods={"GET"}, name="tag_list")
+     * @Route("/list/tag_list", methods={"GET"}, name="tag_list")
      * 
      */ 
     public function index() {

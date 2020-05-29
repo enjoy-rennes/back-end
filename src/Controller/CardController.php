@@ -21,7 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class CardController extends AbstractController
 {
    /**
-     * @Route("/card_list", methods={"GET"}, name="card_list")
+     * @Route("list/card_list", methods={"GET"}, name="card_list")
      * 
      */ 
     public function index() {

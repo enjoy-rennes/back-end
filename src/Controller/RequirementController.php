@@ -18,7 +18,7 @@ class RequirementController extends AbstractController
 {
              
    /**
-     * @Route("/requirement_list", methods={"GET"}, name="requirement_list")
+     * @Route("/list/requirement_list", methods={"GET"}, name="requirement_list")
      * 
      */ 
     public function index() {
