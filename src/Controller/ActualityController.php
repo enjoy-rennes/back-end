@@ -16,11 +16,35 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class ActualityController extends AbstractController
 {
-    /**
+
+     /**
      * @Route("/actuality_list", methods={"GET"}, name="actuality_list")
+     * 
+     */ 
+    public function Actuality() {
+
+        $actuality= $this->getDoctrine()->getRepository
+        (Actuality::class)->findAll();
+
+        $datas = array();
+        foreach ($actuality as $key => $actuality) {
+
+            $datas[$key]['id'] = $actuality->getId();
+            $datas[$key]['name'] = $actuality->getName();
+            $datas[$key]['description'] = $actuality->getDescription();
+            $datas[$key]['date'] = $actuality->getDate();
+
+        }
+        return new jsonResponse($datas);
+     }
+
+    /**
+     * @Route("/actuality", methods={"GET"}, name="actuality")
      * 
      */ 
     public function index() {
@@ -44,7 +68,7 @@ class ActualityController extends AbstractController
                 'class'=>'App\Entity\Society',
                 'choice_label'=>'name',
                 'expanded'=>false,
-                'multiple'=>false
+                'multiple'=>true
             ))
             ->add('save', SubmitType::class, ['label' => 'Ajouter une actualité'])
             ->getForm();
@@ -81,7 +105,7 @@ class ActualityController extends AbstractController
             'class'=>'App\Entity\Society',
             'choice_label'=>'name',
             'expanded'=>false,
-            'multiple'=>false
+            'multiple'=>true
         ))
         ->add('save', SubmitType::class, ['label' => 'Modifier'])
         ->getForm();

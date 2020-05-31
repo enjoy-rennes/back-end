@@ -7,8 +7,9 @@
 <h1> {{ card.id }} </h1>
 <p> {{ card.name }} </p>
 <p> {{ card.description }} </p>
-<p> {{ card.society.name}} </p>
-
+<p> {% for  card in card.getSociety %}
+ <td> {{ card.name }} </td>
+ {% endfor %}</p>
 
 <a href="/card_list" class="btn 
 btn-dark">Retour</a>

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity;
 use App\Entity\Tag;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,16 +19,36 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TagController extends AbstractController
 {
-     /**
-     * @Route("/list/tag_list", methods={"GET"}, name="tag_list")
+
+    /**
+     * @Route("/tag", methods={"GET"}, name="tag")
      * 
      */ 
-    public function index() {
+    public function ListTag() {
 
         $tag= $this->getDoctrine()->getRepository
         (Tag::class)->findAll();
 
         return $this->render('tag/index.html.twig', array ('tag' => $tag));
+     }
+    
+     /**
+     * @Route("/tag_list", methods={"GET"}, name="tag_list")
+     * 
+     */ 
+    public function tag() {
+
+        $tag= $this->getDoctrine()->getRepository
+        (Tag::class)->findAll();
+
+        $datas = array();
+        foreach ($tag as $key => $tag) {
+            $datas[$key]['id'] = $tag->getId();
+            $datas[$key]['name'] = $tag->getName();
+        }
+        
+        return new JsonResponse($datas);
+        //return $this->render('tag/index.html.twig', array ('tag' => $tag));
      }
          
     

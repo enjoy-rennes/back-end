@@ -12,6 +12,7 @@ use App\Entity\Tag;
 use App\Entity\Requirement;
 use App\Entity\Society;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -19,10 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
+
 class HelpController extends AbstractController
 {
-   /**
-     * @Route("/help_list", methods={"GET"}, name="help_list")
+
+    /**
+     * @Route("/help", methods={"GET"}, name="help")
      * 
      */ 
     public function index() {
@@ -33,6 +36,35 @@ class HelpController extends AbstractController
         return $this->render('help/index.html.twig', array ('help' => $help));
      }
 
+
+
+     /**
+     * @Route("/help_list", methods={"GET"}, name="help_list")
+     * 
+     */ 
+    public function help() {
+
+        $help= $this->getDoctrine()->getRepository
+        (Help::class)->findAll();
+
+        $datas = array();
+        foreach ($help as $key => $help) {
+
+            $datas[$key]['id'] = $help->getId();
+            $datas[$key]['name'] = $help->getName();
+            $datas[$key]['description'] = $help->getDescription();
+            $datas[$key]['requirement'] = $help->getRequirement();
+            $datas[$key]['tag'] = $help->getTag();
+            $datas[$key]['society'] = $help->getSociety();
+
+
+        }
+        return new jsonResponse($datas);
+     }
+
+
+
+   
       /**
      * @Route("/help_five", methods={"GET"}, name="help_five")
      * 

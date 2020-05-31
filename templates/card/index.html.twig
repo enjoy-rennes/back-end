@@ -23,8 +23,9 @@
 <td> {{ card.id }} </td>
 <td> {{ card.name }} </td>
 <td> {{ card.description|u.truncate(40, '...')}} </td>
-<td> {{ card.society.name }} </td>
-
+{% for  card in card.getSociety %}
+ <td> {{ card.name }} </td>
+ {% endfor %}
 <td> 
 <a href="/card/{{ card.id }}" class=" fa fa-eye"></a>
 <a href="/card/update/{{ card.id }}" class=" fa fa-edit"></a>

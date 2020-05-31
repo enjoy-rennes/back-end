@@ -8,17 +8,42 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity;
 use App\Entity\Requirement;
-
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 
 class RequirementController extends AbstractController
 {
+
+    /**
+     * @Route("/requirement_list", methods={"GET"}, name="requirement_list")
+     * 
+     */ 
+    public function Requirement() {
+
+        $requirement= $this->getDoctrine()->getRepository
+        (Requirement::class)->findAll();
+
+        $datas = array();
+        foreach ($requirement as $key => $requirement) {
+
+            $datas[$key]['id'] = $requirement->getId();
+            $datas[$key]['name'] = $requirement->getName();
+            $datas[$key]['operator'] = $requirement->getOperator();
+            $datas[$key]['type'] = $requirement->getType();
+            $datas[$key]['value'] = $requirement->getValue();
+
+        }
+        return new jsonResponse($datas);
+     }
+
              
    /**
-     * @Route("/list/requirement_list", methods={"GET"}, name="requirement_list")
+     * @Route("/requirement", methods={"GET"}, name="requirement")
      * 
      */ 
     public function index() {

@@ -15,13 +15,38 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 
 
 class CardController extends AbstractController
 {
+
+
+    /**
+     * @Route("/card_list", methods={"GET"}, name="card_list")
+     * 
+     */ 
+    public function card() {
+
+        $card= $this->getDoctrine()->getRepository
+        (Card::class)->findAll();
+
+        $datas = array();
+        foreach ($card as $key => $card) {
+
+            $datas[$key]['id'] = $card->getId();
+            $datas[$key]['name'] = $card->getName();
+            $datas[$key]['description'] = $card->getDescription();
+            $datas[$key]['society'] = $card->getSociety();
+
+        }
+        return new jsonResponse($datas);
+     }
+
    /**
-     * @Route("list/card_list", methods={"GET"}, name="card_list")
+     * @Route("card", methods={"GET"}, name="card")
      * 
      */ 
     public function index() {
@@ -56,7 +81,7 @@ class CardController extends AbstractController
                 'class'=>'App\Entity\Society',
                 'choice_label'=>'name',
                 'expanded'=>false,
-                'multiple'=>false
+                'multiple'=>true
             ))
             ->add('save', SubmitType::class, ['label' => 'Ajouter une carte'])
             ->getForm();
@@ -92,7 +117,7 @@ class CardController extends AbstractController
             'class'=>'App\Entity\Society',
             'choice_label'=>'name',
             'expanded'=>false,
-            'multiple'=>false
+            'multiple'=>true
         ))
         ->add('save', SubmitType::class, ['label' => 'Modifier'])
         ->getForm();

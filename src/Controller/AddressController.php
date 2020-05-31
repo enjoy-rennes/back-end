@@ -12,13 +12,43 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 
 class AddressController extends AbstractController
 {
+
     /**
      * @Route("/address_list", methods={"GET"}, name="address_list")
+     * 
+     */ 
+    public function Address() {
+
+        $address= $this->getDoctrine()->getRepository
+        (Address::class)->findAll();
+
+        $datas = array();
+        foreach ($address as $key => $address) {
+
+            $datas[$key]['id'] = $address->getId();
+            $datas[$key]['postalCode'] = $address->getPostalCode();
+            $datas[$key]['streetNumber'] = $address->getStreetNumber();
+            $datas[$key]['address'] = $address->getAddress();
+            $datas[$key]['city'] = $address->getCity();
+            $datas[$key]['country'] = $address->getCountry();
+            $datas[$key]['name'] = $address->getName();
+            $datas[$key]['society'] = $address->getSociety();
+
+ 
+        }
+        return new jsonResponse($datas);
+    }
+
+    /**
+     * @Route("/address", methods={"GET"}, name="address")
      * 
      */ 
     public function index() {

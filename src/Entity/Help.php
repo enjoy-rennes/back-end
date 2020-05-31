@@ -30,7 +30,6 @@ class Help
     private $description;
 
 
-
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Requirement", inversedBy="helps")
      */

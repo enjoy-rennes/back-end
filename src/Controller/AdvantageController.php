@@ -17,13 +17,40 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 
 
 class AdvantageController extends AbstractController
 {
-   /**
+
+    
+     /**
      * @Route("/advantage_list", methods={"GET"}, name="advantage_list")
+     * 
+     */ 
+    public function Advantage() {
+
+        $advantage= $this->getDoctrine()->getRepository
+        (Advantage::class)->findAll();
+
+        $datas = array();
+        foreach ($advantage as $key => $advantage) {
+
+            $datas[$key]['id'] = $advantage->getId();
+            $datas[$key]['name'] = $advantage->getName();
+            $datas[$key]['description'] = $advantage->getDescription();
+            $datas[$key]['tag'] = $advantage->gettag();
+            $datas[$key]['society'] = $advantage->getSociety();
+
+        }
+        return new jsonResponse($datas);
+     }
+
+
+   /**
+     * @Route("/advantage", methods={"GET"}, name="advantage")
      * 
      */ 
     public function index() {

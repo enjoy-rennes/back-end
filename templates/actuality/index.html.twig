@@ -25,7 +25,9 @@
 <td> {{ actuality.name }} </td>
 <td> {{ actuality.date|date('Y-m-d') }} </td> 
 <td> {{ actuality.description|u.truncate(40, '...')}} </td>
-<td> {{ actuality.society.name }} </td>
+{% for  actuality in actuality.getSociety %}
+ <td> {{ actuality.name }} </td>
+ {% endfor %}
 <td> 
 <a href="/actuality/{{ actuality.id }}" class="fa fa-eye"></a>
 <a href="/actuality/update/{{ actuality.id }}" class=" fa fa-edit"></a>

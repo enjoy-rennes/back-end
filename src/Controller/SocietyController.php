@@ -16,15 +16,44 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
 class SocietyController extends AbstractController
 {
-    
+
     /**
      * @Route("/place_list", methods={"GET"}, name="place_list")
+     * 
+     */ 
+    
+    public function Place() {
+
+        $society= $this->getDoctrine()->getRepository
+        (Society::class)->findById(array(6,1,5,9,14));
+
+        $society= $this->getDoctrine()->getRepository
+        (Society::class)->findAll();
+
+        $datas = array();
+        foreach ($society as $key => $society) {
+
+            $datas[$key]['id'] = $society->getId();
+            $datas[$key]['phone'] = $society->getPhone();
+            $datas[$key]['name'] = $society->getName();
+            $datas[$key]['type'] = $society->getType();
+            $datas[$key]['website'] = $society->getWebsite();
+            $datas[$key]['description'] = $society->getDescription();
+            $datas[$key]['address'] = $society->getAddress();
+
+        }
+        return new jsonResponse($datas);
+     }
+
+    
+    /**
+     * @Route("/place", methods={"GET"}, name="place")
      * 
      */ 
     
@@ -36,9 +65,33 @@ class SocietyController extends AbstractController
         return $this->render('society/index.html.twig', array ('society' => $society));
      }
 
+     /**
+     * @Route("/society_list", methods={"GET"}, name="society_list")
+     * 
+     */ 
+    public function Society() {
+
+        $society= $this->getDoctrine()->getRepository
+        (Society::class)->findAll();
+
+        $datas = array();
+        foreach ($society as $key => $society) {
+
+            $datas[$key]['id'] = $society->getId();
+            $datas[$key]['phone'] = $society->getPhone();
+            $datas[$key]['name'] = $society->getName();
+            $datas[$key]['type'] = $society->getType();
+            $datas[$key]['website'] = $society->getWebsite();
+            $datas[$key]['description'] = $society->getDescription();
+            $datas[$key]['address'] = $society->getAddress();
+
+        }
+        return new jsonResponse($datas);
+     }
+
 
    /**
-     * @Route("/society_list", methods={"GET"}, name="app_homepage")
+     * @Route("/society", methods={"GET"}, name="app_homepage")
      * 
      */ 
      public function SocietyList() {
