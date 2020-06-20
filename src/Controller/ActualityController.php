@@ -17,6 +17,8 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+
 
 
 class ActualityController extends AbstractController
