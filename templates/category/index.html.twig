@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des catégories {% endblock %}
+
+{% block body %}
+
+{% if category %}
+<h1> Liste des catégories</h1>
+<table id="category" class="table table-striped"> 
+<thead>
+<tr>
+<th>#</th>
+<th>Type</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody> 
+
+{% for category in category %}
+<tr> 
+<td> {{ category.id }} </td>
+<td> {{ category.type }} </td>
+
+<td> 
+<a href="/category/{{ category.id }}" class="fa fa-eye"></a>
+
+<a href="/category/update/{{ category.id }}" class=" fa fa-edit"></a>
+
+<a href="#" class=" fa fa-trash delete-category" data-id="{{ category.id }}"></a> 
+
+<a href="/category/add" class=" fa fa-plus"></a>
+
+</td>
+</tr>
+ {% endfor %}
+</tbody>
+</table>
+{% else  %}
+<p> La liste des catégories est vide</p>
+
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="/js/main.js">  </script>
+
+{% endblock %}
+
+
